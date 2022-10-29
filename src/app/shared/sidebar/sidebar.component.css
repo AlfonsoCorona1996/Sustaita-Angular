@@ -1,0 +1,140 @@
+/* * {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.side_bar_back{
+  display: block;
+  height: auto;
+  width: auto;
+  position: static;
+  background: transparent;
+}
+
+.sidebar-container {
+  background: #fff;
+  margin: 15px;
+  margin-right: 0px;
+  padding: 15px;
+
+  width: 220px;
+  height: calc(100vh - 30px);
+
+  border-radius: max(0px, min(15px, ((10vw - 4px)-100%) *9999))/15px;
+  box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+
+  position: static;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+/* ! IMAGEN */
+
+/* .image {
+  height: 30px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#imagen {
+  width: 75%;
+  max-width: 250px;
+  margin: auto;
+  display: block;
+  transition: 0.3s;
+}
+.image:hover > #imagen {
+  cursor: pointer;
+  transform: scale(1.03);
+  transition: 0.3s;
+}
+
+@media (max-width: 769px) {
+  .side_bar_back{
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.356);
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .sidebar-container {
+    display: none;
+    position: fixed;
+  }
+
+} */
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.side_bar_back{
+  display: block;
+  height: 100%;
+  width: auto;
+  position: static;
+  background: transparent;
+}
+
+.sidebar-container {
+  background: #fff;
+  padding: 15px;
+
+  width: 200px;
+  height: 100%;
+  box-shadow: 3px 0px 5px 0px rgba(191,191,191,0.5);
+  -webkit-box-shadow: 3px 0px 5px 0px rgba(191,191,191,0.5);
+  -moz-box-shadow: 3px 0px 5px 0px rgba(191,191,191,0.5);
+
+  position: static;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* ! IMAGEN */
+
+.image {
+  height: 30px;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#imagen {
+  width: 75%;
+  max-width: 250px;
+  margin: auto;
+  display: block;
+  transition: 0.3s;
+}
+.image:hover > #imagen {
+  cursor: pointer;
+  transform: scale(1.03);
+  transition: 0.3s;
+}
+
+@media (max-width: 769px) {
+  .side_bar_back{
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.356);
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .sidebar-container {
+    display: none;
+    position: fixed;
+  }
+
+}
+

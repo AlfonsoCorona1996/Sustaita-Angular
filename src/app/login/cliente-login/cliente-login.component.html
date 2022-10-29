@@ -1,0 +1,29 @@
+<div class="back">
+  <div class="card">
+    <div class="logo">
+      <img [src]="Logo" alt="Image" id="imagen" />
+    </div>
+
+    <!-- *? FORMA -->
+    <div class="form">
+
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm, email)" class="login_form">
+        <input type="email" name="email" ngModel email [(ngModel)]="user.email" id="Correo" placeholder="Correo"
+          required #email="ngModel" (keyup)="fuerafoco(email)" />
+
+        <input type="password" name="password" [(ngModel)]="user.password" id="Contraseña" placeholder="Contraseña"
+          required />
+        <a href="" id="Recuperar">Recuperar contraseña</a>
+
+
+        <!-- *? BOTON -->
+        <button type="submit" class="button shadow-sm">INGRESAR</button>
+
+      </form>
+
+    </div>
+    <div class="foot">
+      <a id="Registrate" href="">¿No tienes una cuenta? Registrate</a>
+    </div>
+  </div>
+</div>
