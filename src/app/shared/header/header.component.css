@@ -4,6 +4,8 @@
   box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
   -webkit-box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
   -moz-box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
+  display: flex;
+  align-items: center;
 }
 
 .header-cont {
@@ -127,4 +129,44 @@
 .header-submenu-text-sub {
   font-size: 12px;
   font-weight: 400;
+}
+
+.header-burger-button{
+  height: 32px;
+}
+
+.burger-input{
+  height: 32px;
+  display: none;
+}
+
+.label{
+  display: flex;
+  height: 32px;
+}
+
+
+.line-burger{
+  background-color: #F0FFFF;
+  height: 3px;
+  width: 26px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  z-index: 100;
+  transition: all 500ms ease;
+}
+
+.burger-input:checked ~ div > .burger-one{
+ /* position: absolute; */
+ transform: rotate(45deg) translateY(7px) translate(7px);
+ transition: all 1s ease;
+}
+.burger-input:checked ~ div > .burger-tree{
+ /* position: absolute; */
+ transform: rotate(-45deg) translateY(1.5px) translate(-1.5px);
+ z-index: 100;
+ transition: all 700ms ease;
+}
+.burger-input:checked ~ div > .burger-two{
+display: none;
 }
