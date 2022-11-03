@@ -7,7 +7,7 @@
       <ul class="header-menu">
 
 
-        <div style="width: 100%;" *ngFor="let categoria of permisos.categorias">
+        <div  *ngFor="let categoria of permisos.categorias" class="header-menu-ngfor">
           <li class="header-list" *ngIf="categoria.show" (click)="uncheck_submenu(categoria.viewValue)">
             <label class="header-button">
               <input type="checkbox" class="menu-check" [attr.id]="categoria.viewValue">

@@ -281,6 +281,10 @@
 
 @media (max-width: 1010px) {
 
+  .header-menu-ngfor{
+    width: 100%;
+  }
+
   .header-user-list {
     justify-content: flex-start !important;
   }
