@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MisCotizacionesComponent } from './mis-cotizaciones/mis-cotizaciones.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    MisCotizacionesComponent
+  ],
   imports: [
     CommonModule
   ]

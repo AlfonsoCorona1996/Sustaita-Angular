@@ -26,36 +26,36 @@ export class SidebarComponent implements OnInit {
         viewValue: 'Cotizaciones',
         show: true,
         sub: [
-          { show: true, viewValue: 'Mis cotizaciones', route: "mis-cotizaciones" },
-          { show: false, viewValue: 'Solicitar cotizacion', route: "" },
-          { show: false, viewValue: 'Actualizar cotizacion', route: "" },
+          { show: true, viewValue: 'Mis cotizaciones', descripcion:"Todas las cotizaciones solicitadas", route: "mis-cotizaciones", icon:"cotizaciones.svg" },
+          { show: true, viewValue: 'Solicitar cotizacion', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
+          { show: false, viewValue: 'Actualizar cotizacion', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
         ]
       },
       {
         viewValue: 'Reportes',
         show: true,
         sub: [
-          { show: false, viewValue: 'Mis reportes', route: "" },
-          { show: true, viewValue: 'Solicitar reportes', route: "" },
-          { show: false, viewValue: 'Actualizar reportes', route: "" },
+          { show: false, viewValue: 'Mis reportes', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:""},
+          { show: true, viewValue: 'Solicitar reportes', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:""},
+          { show: false, viewValue: 'Actualizar reportes', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:""},
         ]
       },
       {
         viewValue: 'Equipos',
         show: false,
         sub: [
-          { show: false, viewValue: 'Mis equipos', route: "" },
-          { show: false, viewValue: 'Solicitar equipos', route: "" },
-          { show: true, viewValue: 'Actualizar equipos', route: "" },
+          { show: false, viewValue: 'Mis equipos', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
+          { show: false, viewValue: 'Solicitar equipos', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
+          { show: true, viewValue: 'Actualizar equipos', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
         ]
       },
       {
         viewValue: 'Facturas',
         show: false,
         sub: [
-          { show: false, viewValue: 'Mis facturas', route: "" },
-          { show: true, viewValue: 'Solicitar facturas', route: "" },
-          { show: true, viewValue: 'Actualizar facturas', route: "" },
+          { show: false, viewValue: 'Mis facturas', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
+          { show: true, viewValue: 'Solicitar facturas',descripcion:"Todas las cotizaciones solicitadas", route: "", icon:"" },
+          { show: true, viewValue: 'Actualizar facturas', descripcion:"Todas las cotizaciones solicitadas",route: "", icon:"" },
         ]
       },
     ]

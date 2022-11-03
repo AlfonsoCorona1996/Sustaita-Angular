@@ -79,6 +79,8 @@ export interface categoria{
 export interface sub_menu{
   show: boolean,
   viewValue: string,
-  route: string
+  descripcion: string,
+  route: string,
+  icon: string
 }
 

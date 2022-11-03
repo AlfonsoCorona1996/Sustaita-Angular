@@ -1,4 +1,4 @@
-<div class="header-container animate__animated animate__slideInDown animate__fadeIn animate__faster">
+<div class="header-container animate__animated animate__slideInDown animate__fadeIn">
 
 
 
@@ -6,51 +6,58 @@
     <nav>
       <ul class="header-menu">
 
-        <li class="header-list">
-          <label class="header-button">
-            <input type="checkbox" class="menu-check">
-            Cotizaciones
-            <img class="header-icon-list" src="../../../assets/chevron-down-solid.svg">
-          </label>
-          <div class="header-submenu-container">
-            <ul class="header-submenu">
-              <li>
-                <a class="header-submenu-item" href="">
-                  <div class="header-submenu-items-center">
-                    <img class="header-submenu-icon" src="../../../assets/cotizaciones.svg">
-                  </div>
-                  <div class="header-submenu-items-center">
-                    <div class="header-submenu-text">
-                      Mis Cotizaciones
-                    </div>
-                    <div class="header-submenu-text-sub">
-                      Todas las cotizaciones solicitadas
-                    </div>
-                  </div>
-                </a>
-              </li>
 
-              <li>
-                <a class="header-submenu-item" href="">
-                  <div class="header-submenu-items-center">
-                    <img class="header-submenu-icon" src="../../../assets/cotizaciones-solicitar.svg">
-                  </div>
-                  <div class="header-submenu-items-center">
-                    <div class="header-submenu-text">
-                      Solicitar
+        <div style="width: 100%;" *ngFor="let categoria of permisos.categorias">
+          <li class="header-list" *ngIf="categoria.show">
+            <label class="header-button">
+              <input type="checkbox" class="menu-check" [attr.id]="categoria.viewValue">
+              {{categoria.viewValue}}
+              <img class="header-icon-list" src="../../../assets/chevron-down-solid.svg">
+            </label>
+            <div class="header-submenu-container">
+              <ul class="header-submenu">
+
+                <li *ngFor="let sub of categoria.sub">
+                  <a class="header-submenu-item" [routerLink]="sub.route" *ngIf="sub.show" (click)="uncheck()">
+                    <div class="header-submenu-items-center">
+                      <img class="header-submenu-icon" src='../../../assets/{{sub.icon}}'>
                     </div>
-                    <div class="header-submenu-text-sub">
-                      Solicitar nueva cotizacion
+                    <div class="header-submenu-items-center">
+                      <div class="header-submenu-text">
+                        {{sub.viewValue}}
+                      </div>
+                      <div class="header-submenu-text-sub">
+                        {{sub.descripcion}}
+                      </div>
                     </div>
-                  </div>
-                </a>
-              </li>
+                  </a>
+                </li>
 
-            </ul>
-          </div>
+                <!-- <li>
+                  <a class="header-submenu-item" href="">
+                    <div class="header-submenu-items-center">
+                      <img class="header-submenu-icon" src="../../../assets/cotizaciones-solicitar.svg">
+                    </div>
+                    <div class="header-submenu-items-center">
+                      <div class="header-submenu-text">
+                        Solicitar
+                      </div>
+                      <div class="header-submenu-text-sub">
+                        Solicitar nueva cotizacion
+                      </div>
+                    </div>
+                  </a>
+                </li> -->
 
-        </li>
+              </ul>
+            </div>
 
+          </li>
+        </div>
+
+
+
+        <!--
         <li class="header-list">
           <label class="header-button">
             <input type="checkbox" class="menu-check">
@@ -94,20 +101,23 @@
             </ul>
           </div>
 
-        </li>
+        </li> -->
 
       </ul>
     </nav>
+    <div class="header-back" (click)="uncheck()">
+
+    </div>
   </div>
 
 
 
   <div class="header-cont-tree animate__animated animate__slideInDown">
 
-    <li class="header-user-list" style="width: 64px; display: flex; justify-content: flex-end;">
+    <li class="header-user-list" style="width: 64px; display: flex; justify-content: flex-end;" (click)="uncheck()">
       <button class="header-button user-button">
         <div class="header-user">
-          <img  class="header-user-icon" src="../../../assets/user-prueba.jpeg">
+          <img class="header-user-icon" src="../../../assets/user-prueba.jpeg">
         </div>
       </button>
 
@@ -116,7 +126,8 @@
           <li>
             <a class="header-submenu-item" href="">
               <div class="header-submenu-items-center">
-                <img class="header-submenu-icon" src="../../../assets/gear-solid.svg" style="margin-right: 24px; height: 18px;">
+                <img class="header-submenu-icon" src="../../../assets/gear-solid.svg"
+                  style="margin-right: 24px; height: 18px;">
               </div>
               <div class="header-submenu-items-center">
                 <div class="header-submenu-text" style="font-size: 16px;">
@@ -130,7 +141,8 @@
           <li (click)="logout()">
             <a class="header-submenu-item" href="">
               <div class="header-submenu-items-center">
-                <img class="header-submenu-icon" src="../../../assets/right-from-bracket-solid.svg" style="margin-right: 24px; height: 18px;">
+                <img class="header-submenu-icon" src="../../../assets/right-from-bracket-solid.svg"
+                  style="margin-right: 24px; height: 18px;">
               </div>
               <div class="header-submenu-items-center">
                 <div class="header-submenu-text" style="font-size: 16px;">
@@ -148,11 +160,11 @@
 
   <div class="header-cont animate__animated animate__slideInDown">
     <div class="header-space-menu"></div>
-    <img class="header-icon" src="../../../assets/S.svg">
+    <img class="header-icon" src="../../../assets/S.svg" routerLink="principal" (click)="uncheck()">
     <div class="header-burger-container">
 
       <label class="label">
-        <input type="checkbox" class="burger-input">
+        <input type="checkbox" class="burger-input" id="burger">
         <div class="header-burger-button">
           <div class="line-burger burger-one"></div>
           <div class="line-burger burger-two"></div>
