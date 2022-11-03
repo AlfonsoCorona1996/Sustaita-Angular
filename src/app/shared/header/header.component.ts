@@ -75,4 +75,27 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  uncheck_submenu(id:string){
+    for (let check of this.permisos.categorias) {
+      if (check.show && check.viewValue != id) {
+        const box = document.getElementById(check.viewValue) as HTMLInputElement | null;
+        if (box != null) { box.checked = false; }
+      }
+    }
+  }
+
+  uncheck_burger(){
+    const burger = document.getElementById("burger") as HTMLInputElement | null
+    if(burger != null){
+      if (burger.checked == false){
+        for (let check of this.permisos.categorias) {
+          if (check.show) {
+            const box = document.getElementById(check.viewValue) as HTMLInputElement | null;
+            if (box != null) { box.checked = false; }
+          }
+        }
+      }
+    }
+  }
+
 }

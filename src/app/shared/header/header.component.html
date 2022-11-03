@@ -8,7 +8,7 @@
 
 
         <div style="width: 100%;" *ngFor="let categoria of permisos.categorias">
-          <li class="header-list" *ngIf="categoria.show">
+          <li class="header-list" *ngIf="categoria.show" (click)="uncheck_submenu(categoria.viewValue)">
             <label class="header-button">
               <input type="checkbox" class="menu-check" [attr.id]="categoria.viewValue">
               {{categoria.viewValue}}
@@ -164,7 +164,7 @@
     <div class="header-burger-container">
 
       <label class="label">
-        <input type="checkbox" class="burger-input" id="burger">
+        <input type="checkbox" class="burger-input" id="burger" (change)="uncheck_burger()">
         <div class="header-burger-button">
           <div class="line-burger burger-one"></div>
           <div class="line-burger burger-two"></div>

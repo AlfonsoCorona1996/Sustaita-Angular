@@ -352,13 +352,14 @@
     width: 320px;
     padding: 16px;
     flex-direction: column;
-    height: calc(100vh - 80px);
+    height: calc(80vh - 80px);
     background-color: #ffffff;
     border-radius: 10px;
     align-items: center;
 
     box-sizing: border-box;
     z-index: 100;
+    overflow-y: auto;
   }
 
   .header-list {
@@ -367,7 +368,9 @@
 
   .header-submenu {
     padding-right: 0px;
+    display: none;
   }
+
 
   .header-submenu-container {
     padding: 16px 0px 0px 0px;
@@ -409,6 +412,10 @@
     transform: scale(0.99) translateY(-0.7em);
     transition-property: all;
     transform-origin: top;
+  }
+
+  .header-button:has(>.menu-check:checked)~.header-submenu-container>.header-submenu{
+    display: block;
   }
 
   /* .header-list:hover > .header-submenu-container{
