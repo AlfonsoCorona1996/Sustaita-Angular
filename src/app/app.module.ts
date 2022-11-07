@@ -9,6 +9,10 @@ import { SharedModule } from './shared/shared.module';
 import { LoginModule } from './login/login.module';
 import { InicioModule } from './inicio/inicio.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { ClienteModule } from './inicio/cliente/cliente.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -21,6 +25,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     SharedModule,
     LoginModule,
+    FormsModule,
+    ClienteModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

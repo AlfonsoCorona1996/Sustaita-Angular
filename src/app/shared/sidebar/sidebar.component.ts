@@ -105,50 +105,50 @@ export class SidebarComponent implements OnInit {
   }
 
   close(event: any) {
-    if (window.matchMedia("(max-width: 769px)").matches){
-    if (event.target.id == 'sidebar_back') {
-      $(() => {
-        var effects = 'animate__fadeOut';
-        var effects2 = 'animate__fadeOutLeft';
-        var element = $('div.sidebar_back');
-        var element2 = $('section.sidebar_inside');
+  //   if (window.matchMedia("(max-width: 769px)").matches){
+  //   if (event.target.id == 'sidebar_back') {
+  //     $(() => {
+  //       var effects = 'animate__fadeOut';
+  //       var effects2 = 'animate__fadeOutLeft';
+  //       var element = $('div.sidebar_back');
+  //       var element2 = $('section.sidebar_inside');
 
-        $(element2).removeClass('animate__slideInLeft').addClass(effects2);
+  //       $(element2).removeClass('animate__slideInLeft').addClass(effects2);
 
-        $(element).removeClass('animate__fadeIn').addClass(effects);
-        setTimeout(() => {
-          $(element).removeClass(effects).addClass('animate__fadeIn')
-          $(element2).removeClass(effects2).addClass('animate__slideInLeft')
-          $("div.sidebar_back").hide();
-          $("div.sidebar_inside").hide();
-        }, 500);
-      })
-    }
-  }
+  //       $(element).removeClass('animate__fadeIn').addClass(effects);
+  //       setTimeout(() => {
+  //         $(element).removeClass(effects).addClass('animate__fadeIn')
+  //         $(element2).removeClass(effects2).addClass('animate__slideInLeft')
+  //         $("div.sidebar_back").hide();
+  //         $("div.sidebar_inside").hide();
+  //       }, 500);
+  //     })
+  //   }
+  // }
   }
   close_2() {
-    if (window.matchMedia("(max-width: 769px)").matches){
+  //   if (window.matchMedia("(max-width: 769px)").matches){
 
-    setTimeout(() => {
-      $(() => {
-        var effects = 'animate__fadeOut';
-        var effects2 = 'animate__fadeOutLeft';
-        var element = $('div.sidebar_back');
-        var element2 = $('section.sidebar_inside');
+  //   setTimeout(() => {
+  //     $(() => {
+  //       var effects = 'animate__fadeOut';
+  //       var effects2 = 'animate__fadeOutLeft';
+  //       var element = $('div.sidebar_back');
+  //       var element2 = $('section.sidebar_inside');
 
-        $(element2).removeClass('animate__slideInLeft').addClass(effects2);
+  //       $(element2).removeClass('animate__slideInLeft').addClass(effects2);
 
-        $(element).removeClass('animate__fadeIn').addClass(effects);
-        setTimeout(() => {
-          $(element).removeClass(effects).addClass('animate__fadeIn')
-          $(element2).removeClass(effects2).addClass('animate__slideInLeft')
-          $("div.sidebar_back").hide();
-          $("div.sidebar_inside").hide();
-        }, 500);
-      })
-    }, 200);
-    this.uncheckAll()
-  }
+  //       $(element).removeClass('animate__fadeIn').addClass(effects);
+  //       setTimeout(() => {
+  //         $(element).removeClass(effects).addClass('animate__fadeIn')
+  //         $(element2).removeClass(effects2).addClass('animate__slideInLeft')
+  //         $("div.sidebar_back").hide();
+  //         $("div.sidebar_inside").hide();
+  //       }, 500);
+  //     })
+  //   }, 200);
+  //   this.uncheckAll()
+  // }
   }
 
 }

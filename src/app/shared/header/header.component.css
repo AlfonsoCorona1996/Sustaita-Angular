@@ -1,16 +1,25 @@
-.header-container {
+.header-background{
   background-color: #2E3133;
-  height: 32px;
-  /* background-color: #2d6183; */
-  padding: 16px 16px;
   box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
   -webkit-box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
   -moz-box-shadow: 0px 4px 5px 0px rgba(191, 191, 191, 0.75);
+  /* display: flex; */
+}
+
+.header-container {
+  /* background-color: #2E3133; */
+  height: 32px;
+  /* max-width: 1248px; */
+  /* background-color: #2d6183; */
+  padding: 16px 16px;
+
   display: flex;
   align-items: center;
 
   flex-direction: row-reverse;
   justify-content: flex-end;
+
+  margin: 0 auto;
 }
 
 .header-cont {
@@ -70,7 +79,7 @@
 
 .header-button {
   padding: 8px;
-  font-size: 16px;
+  font-size: 18px;
   color: rgb(255, 255, 255);
   background-color: transparent;
   border: 0px;
@@ -95,7 +104,7 @@
     cursor: pointer;
     position: absolute;
     right: 0;
-    margin-right: 16px;
+    margin-right: 32px;
     /* width: calc(100vw - 32px); */
     /* flex: 1; */
     display: flex;
@@ -120,6 +129,10 @@
     visibility: hidden;
     opacity: 0;
 
+  }
+
+  .header-container {
+    padding: 16px 32px;
   }
 
 }
@@ -296,6 +309,7 @@
 
   .header-cont-two {
     display: hidden;
+    visibility: hidden;
     opacity: 0;
     display: flex;
     width: 100vw;
@@ -333,6 +347,7 @@
   }
 
   .header-cont-two:has(~.header-cont>.header-burger-container>.label>.burger-input:checked) {
+    visibility: visible;
     opacity: 1;
     display: flex;
     width: 100vw;
@@ -372,18 +387,25 @@
 
   .header-submenu {
     padding-right: 0px;
-    display: none;
+    /* display: none; */
   }
 
 
   .header-submenu-container {
     padding: 16px 0px 0px 0px;
-    position: absolute;
+    /* position: absolute; */
+    position: relative;
+    visibility: hidden;
+
+
     opacity: 0;
     margin: 0px;
     background-color: transparent;
     border: 0px;
     box-shadow: none;
+
+    max-height: 0px;
+    transition: all 200ms ease;
   }
 
   .header-icon-list {
@@ -416,10 +438,16 @@
     transform: scale(0.99) translateY(-0.7em);
     transition-property: all;
     transform-origin: top;
+
+    max-height: 1000px;
+    transition: all 500ms ease;
   }
+
 
   .header-button:has(>.menu-check:checked)~.header-submenu-container>.header-submenu{
     display: block;
+    height: auto;
+    transition: all 500ms ease;
   }
 
   /* .header-list:hover > .header-submenu-container{

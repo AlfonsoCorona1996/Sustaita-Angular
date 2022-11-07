@@ -1,0 +1,212 @@
+.miscotizaciones-general-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.miscotizaciones-header {
+  background-color: #f6f8fa;
+  padding: 16px 32px;
+  border-bottom: #cfcfcf .5px solid;
+}
+
+.miscotizaciones-header-width {
+  max-width: 1248px;
+}
+
+.miscotzaciones-header-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2e3133;
+}
+
+.miscotizaciones-header-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0087d4;
+}
+
+
+
+.miscotizaciones-container {
+  flex: 1;
+  background-color: white;
+  max-width: 100vw;
+  /* overflow-x: hidden; */
+  display: flex;
+  flex-direction: column;
+}
+
+.miscotizaciones-container-toolBar {
+  padding: 16px;
+  padding-bottom: 0px;
+  display: flex;
+}
+
+.miscotizaciones-container-toolBar-search{
+  margin-right: 8px;
+  height: 40px;
+  width: 300px;
+  padding: 12px 0px 12px 12px;
+  padding-right: 0px;
+  border-radius: 8px;
+  border: #cfcfcf .5px solid;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  color: #2e3133;
+
+}
+
+input[type=search]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0087d4;
+}
+
+.miscotizaciones-container-toolBar-search-options{
+  padding: 0px 8px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  border: #cfcfcf .5px solid;
+  color: #2e3133;
+}
+
+.miscotizaciones-container-toolBar-search-options:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #0087d4;
+}
+
+SELECT {
+  background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+  background-position: calc(100% - 0.75rem) center !important;
+  -moz-appearance:none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  padding-right: 2rem !important;
+}
+
+option{
+  color: #2e3133;
+  font-weight: 600;
+  margin: 8px;
+}
+
+
+
+
+.miscotizaciones-content-kanbanBoard {
+  padding: 16px;
+
+  flex: 1;
+  max-width: 100vw;
+
+  display: flex;
+
+  overflow-x: auto;
+  /* overflow-y: hidden; */
+}
+
+.miscotiaciones-content-kanbanTable {
+  margin-right: 16px;
+  padding: 10px;
+  max-height: 50%;
+  min-width: 355px;
+  max-width: 355px;
+  background-color: #f6f8fa;
+  border-radius: 8px;
+  border: #cfcfcf .5px solid;
+
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  overflow-y: auto;
+}
+
+.OnHold {
+  margin-right: 0px !important;
+}
+
+.miscotiaciones-content-kanbanTable-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2e3133;
+  display: flex;
+  align-items: center;
+}
+
+.miscotiaciones-content-kanbanTable-title-counter {
+  margin-right: 8px;
+  font-size: 14px;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  background-color: #e4e4e4;
+  padding: 2px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+.miscotiaciones-content-kanbanTable-title-add{
+  height: 16px;
+  width: 16px;
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+
+}
+
+.miscotiaciones-content-kanbanTable-title-add-icon{
+  width: 20px;
+  cursor: pointer;
+}
+.miscotiaciones-content-kanbanTable-title-add-icon:hover{
+  filter: invert(37%) sepia(90%) saturate(2497%) hue-rotate(179deg) brightness(92%) contrast(101%);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  margin-right: 8px;
+  background-image: url("../../../../../assets/xmark-solid.svg");
+  background-repeat: no-repeat;
+  filter: invert(37%) sepia(90%) saturate(2497%) hue-rotate(179deg) brightness(92%) contrast(101%);
+  background-position: center;
+  cursor: pointer;
+}
+
+.miscotiaciones-content-kanbanTable-cards{
+  height: 100%;
+  max-height: 96%;
+  overflow-y: auto;
+}
+
+.miscotiaciones-content-kanbanTable-card{
+padding: 8px;
+
+  background-color: #FFFFFF;
+  margin-top: 8px;
+  border: #cfcfcf .5px solid;
+  border-radius: 6px;
+
+  box-shadow: 2px 4px 5px 0px rgb(191 191 191 / 20%);
+  -webkit-box-shadow: 2px 4px 5px 0px rgb(191 191 191 / 20%);
+  -moz-box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.2);
+
+}
+
+
+@media (max-width: 500px) {
+  .miscotizaciones-container-toolBar-search{
+    width: auto;
+  }
+  .miscotizaciones-container-toolBar{
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

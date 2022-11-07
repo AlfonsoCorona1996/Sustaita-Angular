@@ -5,6 +5,8 @@ import { PopUpModule } from './pop-up/pop-up.module';
 import { InicioRoutingModule } from './inicio-routing.module';
 import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
+import { ClienteModule } from './cliente/cliente.module';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +18,9 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     PopUpModule,
     InicioRoutingModule,
-    SharedModule
+    SharedModule,
+    ClienteModule,
+    FormsModule
   ],
   exports: [
     InicioComponent

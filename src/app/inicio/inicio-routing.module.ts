@@ -5,6 +5,7 @@ import { InicioComponent } from './inicio.component';
 import { Child_Cliente_Guard } from '../guards/child_cliente.guard';
 import { PrincipalClientComponent } from './cliente/principal-client.component';
 import { MisCotizacionesComponent } from './cliente/cotizaciones/mis-cotizaciones/mis-cotizaciones.component';
+import { FormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -27,7 +28,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule
   ],
   exports: [
     RouterModule
