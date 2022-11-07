@@ -67,25 +67,26 @@
           En Progreso
         </div>
 
+        <div class="miscotiaciones-content-kanbanTable-cards">
+          <div class="miscotiaciones-content-kanbanTable-card"
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Proceso':filter_option:filter_list">
+            <div class="miscotiaciones-content-kanbanTable-card-folio">
+              {{cot.folio}}
+            </div>
+            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+              {{cot.descripcion}}
+            </div>
+            <div class="miscotiaciones-content-kanbanTable-card-footer">
+              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
+                {{cot.sitio}}
+              </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
+                {{cot.fecha_pro}}
+              </div>
+            </div>
+          </div>
 
-        <div class="miscotiaciones-content-kanbanTable-card"
-          *ngFor="let cot of cotizaciones | cotizacionesPipe:'Proceso':filter_option:filter_list">
-          <div class="miscotiaciones-content-kanbanTable-card-folio">
-            {{cot.folio}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-            {{cot.descripcion}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-footer">
-            <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-              {{cot.sitio}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-              {{cot.fecha_pro}}
-            </div>
-          </div>
         </div>
-
       </div>
 
       <div class="miscotiaciones-content-kanbanTable Done">
@@ -93,25 +94,25 @@
           <span class="miscotiaciones-content-kanbanTable-title-counter">{{entregada}}</span>
           Entregadas
         </div>
-
-        <div class="miscotiaciones-content-kanbanTable-card"
-          *ngFor="let cot of cotizaciones | cotizacionesPipe:'Entregada':filter_option:filter_list">
-          <div class="miscotiaciones-content-kanbanTable-card-folio">
-            {{cot.folio}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-            {{cot.descripcion}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-footer">
-            <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-              {{cot.sitio}}
+        <div class="miscotiaciones-content-kanbanTable-cards">
+          <div class="miscotiaciones-content-kanbanTable-card"
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Entregada':filter_option:filter_list">
+            <div class="miscotiaciones-content-kanbanTable-card-folio">
+              {{cot.folio}}
             </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-              {{cot.fecha_cot}}
+            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+              {{cot.descripcion}}
+            </div>
+            <div class="miscotiaciones-content-kanbanTable-card-footer">
+              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
+                {{cot.sitio}}
+              </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
+                {{cot.fecha_cot}}
+              </div>
             </div>
           </div>
         </div>
-
 
       </div>
 
@@ -121,24 +122,25 @@
           Detenidas
         </div>
 
-        <div class="miscotiaciones-content-kanbanTable-card"
-          *ngFor="let cot of cotizaciones | cotizacionesPipe:'Caduco':filter_option:filter_list">
-          <div class="miscotiaciones-content-kanbanTable-card-folio">
-            {{cot.folio}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-            {{cot.descripcion}}
-          </div>
-          <div class="miscotiaciones-content-kanbanTable-card-footer">
-            <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-              {{cot.sitio}}
+        <div class="miscotiaciones-content-kanbanTable-cards">
+          <div class="miscotiaciones-content-kanbanTable-card"
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Caduco':filter_option:filter_list">
+            <div class="miscotiaciones-content-kanbanTable-card-folio">
+              {{cot.folio}}
             </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-              {{cot.fecha_cad}}
+            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+              {{cot.descripcion}}
+            </div>
+            <div class="miscotiaciones-content-kanbanTable-card-footer">
+              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
+                {{cot.sitio}}
+              </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
+                {{cot.fecha_cad}}
+              </div>
             </div>
           </div>
         </div>
-
 
       </div>
 

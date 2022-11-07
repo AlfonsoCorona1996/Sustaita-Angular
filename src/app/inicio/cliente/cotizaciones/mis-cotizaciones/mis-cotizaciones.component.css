@@ -29,7 +29,7 @@
 
 
 .miscotizaciones-container {
-  flex: 1;
+  flex: 1 1 0;
   background-color: white;
   max-width: 100vw;
   /* overflow-x: hidden; */
@@ -155,7 +155,7 @@ option{
   height: 16px;
   width: 16px;
   display: flex;
-  flex: 1;
+  flex: 1 1 0;
   justify-content: flex-end;
 
 }
