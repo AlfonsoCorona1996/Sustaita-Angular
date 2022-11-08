@@ -6,7 +6,7 @@
       <div class="miscotzaciones-header-title">
         Mis cotizaciones
         <div class="miscotizaciones-header-subtitle">
-          Hospital Puerta de Hierro
+          {{empresa}}
         </div>
       </div>
 
@@ -18,6 +18,7 @@
   </div>
 
   <div class="miscotizaciones-container">
+
     <div class="miscotizaciones-container-toolBar">
       <input type="search" placeholder="Buscar..." class="miscotizaciones-container-toolBar-search" id="buscador"
         [(ngModel)]="buscador" #filtrado (keyup)="Search(filtrado.value)" (change)="Search(filtrado.value)"
@@ -39,22 +40,37 @@
         </div>
 
         <div class="miscotiaciones-content-kanbanTable-cards">
+
           <div class="miscotiaciones-content-kanbanTable-card"
-            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Solicitada':filter_option:filter_list">
-            <div class="miscotiaciones-content-kanbanTable-card-folio">
-              {{cot.folio}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-              {{cot.descripcion}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer">
-              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-                {{cot.sitio}}
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Solicitada':filter_option:filter_list"
+            (click)="Details(cot.folio)">
+            <label class="header-button" style="cursor: pointer;">
+              <input type="checkbox" class="menu-check" [attr.id]="cot.folio" style="display: none;">
+              <div class="miscotiaciones-content-kanbanTable-card-folio">
+                {{cot.folio}}
               </div>
-              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-                {{cot.fecha_sol}}
+              <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+                {{cot.descripcion}}
               </div>
-            </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer">
+                <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
+                  <svg class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon"
+                    xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#0086d4" viewBox="0 0 256 256">
+                    <rect width="256" height="256" fill="none"></rect>
+                    <path
+                      d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.2,83.4,134.6a8.3,8.3,0,0,0,9.2,0C136,236.2,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z">
+                    </path>
+                  </svg>
+                  <!-- <img class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon" src='../../../../../assets/location-dot-solid.svg'> -->
+                  {{cot.sitio}}
+                </div>
+                <div class="miscotiaciones-content-kanbanTable-card-footer-fecha ">
+                  <img class="miscotiaciones-content-kanbanTable-card-footer-fecha-icon"
+                    src='../../../../../assets/calendar-days-solid.svg'>
+                  {{cot.fecha_sol}}
+                </div>
+              </div>
+            </label>
           </div>
         </div>
 
@@ -69,23 +85,36 @@
 
         <div class="miscotiaciones-content-kanbanTable-cards">
           <div class="miscotiaciones-content-kanbanTable-card"
-            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Proceso':filter_option:filter_list">
-            <div class="miscotiaciones-content-kanbanTable-card-folio">
-              {{cot.folio}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-              {{cot.descripcion}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer">
-              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-                {{cot.sitio}}
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Proceso':filter_option:filter_list"
+            (click)="Details(cot.folio)">
+            <label class="header-button" style="cursor: pointer;">
+              <input type="checkbox" class="menu-check" [attr.id]="cot.folio" style="display: none;">
+              <div class="miscotiaciones-content-kanbanTable-card-folio">
+                {{cot.folio}}
               </div>
-              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-                {{cot.fecha_pro}}
+              <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+                {{cot.descripcion}}
               </div>
-            </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer">
+                <div class="miscotiaciones-content-kanbanTable-card-footer-sitio sitio-Progreso">
+                  <!-- <img class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon sitio-Progreso-icon" src='../../../../../assets/location-dot-solid.svg'> -->
+                  <svg class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon sitio-Progreso-icon"
+                    xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#17c28c" viewBox="0 0 256 256">
+                    <rect width="256" height="256" fill="none"></rect>
+                    <path
+                      d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.2,83.4,134.6a8.3,8.3,0,0,0,9.2,0C136,236.2,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z">
+                    </path>
+                  </svg>
+                  {{cot.sitio}}
+                </div>
+                <div class="miscotiaciones-content-kanbanTable-card-footer-fecha fecha-Progreso">
+                  <img class="miscotiaciones-content-kanbanTable-card-footer-fecha-icon"
+                    src='../../../../../assets/calendar-days-solid.svg'>
+                  {{cot.fecha_pro}}
+                </div>
+              </div>
+            </label>
           </div>
-
         </div>
       </div>
 
@@ -96,21 +125,35 @@
         </div>
         <div class="miscotiaciones-content-kanbanTable-cards">
           <div class="miscotiaciones-content-kanbanTable-card"
-            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Entregada':filter_option:filter_list">
-            <div class="miscotiaciones-content-kanbanTable-card-folio">
-              {{cot.folio}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-              {{cot.descripcion}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer">
-              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-                {{cot.sitio}}
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Entregada':filter_option:filter_list"
+            (click)="Details(cot.folio)">
+            <label class="header-button" style="cursor: pointer;">
+              <input type="checkbox" class="menu-check" [attr.id]="cot.folio" style="display: none;">
+              <div class="miscotiaciones-content-kanbanTable-card-folio">
+                {{cot.folio}}
               </div>
-              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-                {{cot.fecha_cot}}
+              <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+                {{cot.descripcion}}
               </div>
-            </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer">
+                <div class="miscotiaciones-content-kanbanTable-card-footer-sitio sitio-Entreagda">
+                  <!-- <img class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon" src='../../../../../assets/location-dot-solid.svg'> -->
+                  <svg class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon sitio-Entregada-icon"
+                    xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#17c28c" viewBox="0 0 256 256">
+                    <rect width="256" height="256" fill="none"></rect>
+                    <path
+                      d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.2,83.4,134.6a8.3,8.3,0,0,0,9.2,0C136,236.2,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z">
+                    </path>
+                  </svg>
+                  {{cot.sitio}}
+                </div>
+                <div class="miscotiaciones-content-kanbanTable-card-footer-fecha fecha-Entregada">
+                  <img class="miscotiaciones-content-kanbanTable-card-footer-fecha-icon"
+                    src='../../../../../assets/calendar-days-solid.svg'>
+                  {{cot.fecha_cot}}
+                </div>
+              </div>
+            </label>
           </div>
         </div>
 
@@ -124,26 +167,71 @@
 
         <div class="miscotiaciones-content-kanbanTable-cards">
           <div class="miscotiaciones-content-kanbanTable-card"
-            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Caduco':filter_option:filter_list">
-            <div class="miscotiaciones-content-kanbanTable-card-folio">
-              {{cot.folio}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-descripcion">
-              {{cot.descripcion}}
-            </div>
-            <div class="miscotiaciones-content-kanbanTable-card-footer">
-              <div class="miscotiaciones-content-kanbanTable-card-footer-sitio">
-                {{cot.sitio}}
+            *ngFor="let cot of cotizaciones | cotizacionesPipe:'Caduco':filter_option:filter_list"
+            (click)="Details(cot.folio)">
+            <label class="header-button" style="cursor: pointer;">
+              <input type="checkbox" class="menu-check" [attr.id]="cot.folio" style="display: none;">
+              <div class="miscotiaciones-content-kanbanTable-card-folio">
+                {{cot.folio}}
               </div>
-              <div class="miscotiaciones-content-kanbanTable-card-footer-fecha">
-                {{cot.fecha_cad}}
+              <div class="miscotiaciones-content-kanbanTable-card-descripcion">
+                {{cot.descripcion}}
               </div>
-            </div>
+              <div class="miscotiaciones-content-kanbanTable-card-footer">
+                <div class="miscotiaciones-content-kanbanTable-card-footer-sitio sitio-Caduco">
+                  <!-- <img class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon sitio-Caduco-icon" src='../../../../../assets/location-dot-solid.svg'> -->
+                  <svg class="miscotiaciones-content-kanbanTable-card-footer-sitio-icon sitio-Caduco-icon"
+                    xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#17c28c" viewBox="0 0 256 256">
+                    <rect width="256" height="256" fill="none"></rect>
+                    <path
+                      d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.2,83.4,134.6a8.3,8.3,0,0,0,9.2,0C136,236.2,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z">
+                    </path>
+                  </svg>
+                  {{cot.sitio}}
+                </div>
+                <div class="miscotiaciones-content-kanbanTable-card-footer-fecha fecha-Caduco">
+                  <img class="miscotiaciones-content-kanbanTable-card-footer-fecha-icon"
+                    src='../../../../../assets/calendar-days-solid.svg'>
+                  {{cot.fecha_cad}}
+                </div>
+              </div>
+            </label>
           </div>
         </div>
 
       </div>
 
+    </div>
+
+    <div class="miscotizaciones-content-info" id="details" (click)="uncheck()">
+      <div class="miscotizaciones-content-info-sidebar">
+        <div class="miscotizaciones-content-info-sidebar-header">
+          <div class="miscotizaciones-content-info-sidebar-header-top">
+            <div class="miscotizaciones-content-info-sidebar-header-top-enterprise">
+
+            </div>
+            <img class="miscotizaciones-content-info-sidebar-header-top-icon"
+              src='../../../../../assets/xmark-solid.svg' (click)="uncheck()">
+          </div>
+          <div class="miscotizaciones-content-info-sidebar-header-title">
+            {{cotizacion.folio}}
+            <div class="miscotizaciones-content-info-sidebar-header-title-site">
+              {{empresa}} - {{cotizacion.sitio}}
+            </div>
+          </div>
+
+          <div class="miscotizaciones-content-info-sidebar-header-status">
+            <div class="miscotizaciones-content-info-sidebar-header-status-status" id="miscotizaciones-status">
+              {{status}}
+            </div>
+            {{cotizacion.atencion}}
+            <div class="miscotizaciones-content-info-sidebar-header-status-days">
+               {{diferencia}}
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
 

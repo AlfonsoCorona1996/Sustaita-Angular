@@ -1,3 +1,7 @@
+:root {
+  --Caducada: #25cac6;
+}
+
 .miscotizaciones-general-container {
   height: 100%;
   display: flex;
@@ -43,7 +47,7 @@
   display: flex;
 }
 
-.miscotizaciones-container-toolBar-search{
+.miscotizaciones-container-toolBar-search {
   margin-right: 8px;
   height: 40px;
   width: 300px;
@@ -64,7 +68,7 @@ input[type=search]:focus {
   box-shadow: 0 0 0 2px #0087d4;
 }
 
-.miscotizaciones-container-toolBar-search-options{
+.miscotizaciones-container-toolBar-search-options {
   padding: 0px 8px;
   height: 40px;
   border-radius: 8px;
@@ -82,13 +86,13 @@ input[type=search]:focus {
 SELECT {
   background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
   background-position: calc(100% - 0.75rem) center !important;
-  -moz-appearance:none !important;
+  -moz-appearance: none !important;
   -webkit-appearance: none !important;
   appearance: none !important;
   padding-right: 2rem !important;
 }
 
-option{
+option {
   color: #2e3133;
   font-weight: 600;
   margin: 8px;
@@ -140,9 +144,9 @@ option{
 
 .miscotiaciones-content-kanbanTable-title-counter {
   margin-right: 8px;
-  font-size: 14px;
-  width: 16px;
-  height: 16px;
+  font-size: 12px;
+  width: 14px;
+  height: 14px;
   display: flex;
   background-color: #e4e4e4;
   padding: 2px;
@@ -151,7 +155,7 @@ option{
   justify-content: center;
 }
 
-.miscotiaciones-content-kanbanTable-title-add{
+.miscotiaciones-content-kanbanTable-title-add {
   height: 16px;
   width: 16px;
   display: flex;
@@ -160,11 +164,12 @@ option{
 
 }
 
-.miscotiaciones-content-kanbanTable-title-add-icon{
+.miscotiaciones-content-kanbanTable-title-add-icon {
   width: 20px;
   cursor: pointer;
 }
-.miscotiaciones-content-kanbanTable-title-add-icon:hover{
+
+.miscotiaciones-content-kanbanTable-title-add-icon:hover {
   filter: invert(37%) sepia(90%) saturate(2497%) hue-rotate(179deg) brightness(92%) contrast(101%);
 }
 
@@ -180,14 +185,14 @@ input[type="search"]::-webkit-search-cancel-button {
   cursor: pointer;
 }
 
-.miscotiaciones-content-kanbanTable-cards{
+.miscotiaciones-content-kanbanTable-cards {
   height: 100%;
   max-height: 96%;
   overflow-y: auto;
 }
 
-.miscotiaciones-content-kanbanTable-card{
-padding: 8px;
+.miscotiaciones-content-kanbanTable-card {
+  padding: 8px;
 
   background-color: #FFFFFF;
   margin-top: 8px;
@@ -197,16 +202,266 @@ padding: 8px;
   box-shadow: 2px 4px 5px 0px rgb(191 191 191 / 20%);
   -webkit-box-shadow: 2px 4px 5px 0px rgb(191 191 191 / 20%);
   -moz-box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: all 100ms ease;
+}
+.miscotiaciones-content-kanbanTable-card:hover {
+  background-color: #fdfdfd;
+  transform: scale(.99);
+  transition: all 100ms ease;
+}
+
+.miscotiaciones-content-kanbanTable-card-folio {
+  margin-bottom: 4px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #2e3133;
+}
+
+.miscotiaciones-content-kanbanTable-card-descripcion {
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #2e3133;
+  height: 2.2em;
+  max-height: 2.2em;
+  line-height: 1.1em;
+  /* overflow: hidden; */
+  display: block;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 
 }
 
+.miscotiaciones-content-kanbanTable-card-footer {
+  display: flex;
+  align-items: baseline;
+}
+
+.miscotiaciones-content-kanbanTable-card-footer-sitio {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2e3133;
+  flex: 1 1 0;
+  color: #0086d4;
+}
+
+.miscotiaciones-content-kanbanTable-card-footer-sitio-icon {
+  margin-right: 1px;
+  height: 9px;
+  width: auto;
+  /* filter: invert(35%) sepia(19%) saturate(6391%) hue-rotate(180deg) brightness(98%) contrast(101%);
+  -webkit-filter: invert(35%) sepia(19%) saturate(6391%) hue-rotate(180deg) brightness(98%) contrast(101%); */
+}
+
+.miscotiaciones-content-kanbanTable-card-footer-fecha-icon {
+  margin-right: 4px;
+  height: 8px;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+.miscotiaciones-content-kanbanTable-card-footer-fecha {
+  background-color: #0086d4;
+  padding: 3px 4px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+  display: flex;
+  align-items: baseline;
+
+}
+
+.sitio-Progreso {
+  /* color: #25cac6; */
+  color: #0a9ea1;
+}
+
+.sitio-Progreso-icon {
+
+  fill: #0a9ea1;
+}
+
+.fecha-Progreso {
+  background-color: #0a9ea1;
+}
+
+.sitio-Caduco {
+  color: #E03F32;
+}
+
+.sitio-Caduco-icon {
+
+  fill: #E03F32;
+}
+
+.fecha-Caduco {
+  background-color: #E03F32;
+}
+
+.sitio-Entreagda {
+  color: #14B76E;
+}
+
+.sitio-Entregada-icon {
+
+  fill: #14B76E;
+}
+
+.fecha-Entregada {
+  background-color: #14B76E;
+}
+
+
+.miscotizaciones-content-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #2e313344;
+  backdrop-filter: blur(1px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+
+  transition: all 500ms ease;
+}
+
+
+.miscotizaciones-content-info-sidebar {
+  /* padding: 16px; */
+  height: min(80%, 570px);
+  width: min(80%, 750px);
+
+  border-radius: 15px;
+
+  background-color: #FFFFFF;
+  transition: all 200ms ease;
+}
+
+.miscotizaciones-content-info-sidebar-header {
+  padding-left: 24px;
+  border-bottom: #cfcfcf .5px solid;
+}
+
+.miscotizaciones-content-info-sidebar-header-top {
+  padding: 16px 16px 0px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.miscotizaciones-content-info-sidebar-header-top-enterprise {
+  flex: 1 1 0;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.miscotizaciones-content-info-sidebar-header-top-icon {
+  height: 16px;
+  cursor: pointer;
+}
+.miscotizaciones-content-info-sidebar-header-top-icon:hover {
+  filter: invert(37%) sepia(90%) saturate(2497%) hue-rotate(179deg) brightness(92%) contrast(101%);
+}
+
+.miscotizaciones-content-info-sidebar-header-title {
+  /* margin-left: 24px; */
+  font-size: 18px;
+  font-weight: 900;
+
+  color: #2e3133;
+
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+}
+
+.miscotizaciones-content-info-sidebar-header-title-site {
+  /* margin-left: 8px; */
+  font-size: 12px;
+  font-weight: 700;
+  color: #72787a;
+
+  margin-bottom: 12px;
+}
+
+.miscotizaciones-content-info-sidebar-header-status {
+  display: flex;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  align-items: baseline;
+}
+
+
+.miscotizaciones-content-kanbanBoard:has(>.miscotiaciones-content-kanbanTable> .miscotiaciones-content-kanbanTable-cards > .miscotiaciones-content-kanbanTable-card > label > input:checked)~.miscotizaciones-content-info {
+  visibility: visible;
+  opacity: 1;
+  /* transform: scale(1.01); */
+  transition: all 200ms ease;
+}
+.miscotizaciones-content-kanbanBoard:has(>.miscotiaciones-content-kanbanTable> .miscotiaciones-content-kanbanTable-cards > .miscotiaciones-content-kanbanTable-card > label > input:checked)~.miscotizaciones-content-info>.miscotizaciones-content-info-sidebar{
+
+  transform: scale(.99);
+  transition: all 200ms ease;
+}
+
+.miscotizaciones-content-info-sidebar-header-status-status{
+  margin-right: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  background-color: #0086d4;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+
+.miscotizaciones-content-info-sidebar-header-status-days{
+  margin-left: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #72787a;
+}
+
+
+
+
+
 
 @media (max-width: 500px) {
-  .miscotizaciones-container-toolBar-search{
+  .miscotizaciones-container-toolBar-search {
     width: auto;
+    font-size: 14px;
   }
-  .miscotizaciones-container-toolBar{
+
+  .miscotizaciones-container-toolBar {
     flex-wrap: wrap;
     gap: 8px;
   }
+
+  .miscotizaciones-container-toolBar-search-options {
+    font-size: 14px;
+  }
+}
+
+
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  border-radius: 9999px;
+  background-color: #AAAAAA;
 }
