@@ -3,7 +3,7 @@ import { cot_list } from 'src/app/interfaces/cotizaciones.interfaces';
 import { CotizacionesClienteService } from 'src/app/services/cotizaciones-cliente.service';
 import { CotizacionesPipePipe } from '../../cotizaciones-pipe.pipe';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { cot_larga } from '../../../../interfaces/cotizaciones.interfaces';
+import { cot_larga, Equipo } from '../../../../interfaces/cotizaciones.interfaces';
 
 interface options {
   value: string;

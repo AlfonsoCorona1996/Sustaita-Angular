@@ -215,21 +215,122 @@
           </div>
           <div class="miscotizaciones-content-info-sidebar-header-title">
             {{cotizacion.folio}}
-            <div class="miscotizaciones-content-info-sidebar-header-title-site">
+            <!-- <div class="miscotizaciones-content-info-sidebar-header-title-site">
               {{empresa}} - {{cotizacion.sitio}}
-            </div>
+            </div> -->
           </div>
 
           <div class="miscotizaciones-content-info-sidebar-header-status">
             <div class="miscotizaciones-content-info-sidebar-header-status-status" id="miscotizaciones-status">
               {{status}}
             </div>
-            {{cotizacion.atencion}}
+            <!-- {{cotizacion.atencion}} -->
             <div class="miscotizaciones-content-info-sidebar-header-status-days">
-               {{diferencia}}
+              {{diferencia}}
             </div>
           </div>
 
+        </div>
+        <div class="miscotizaciones-contentn-info-sidebar-container">
+          <div class="miscotizaciones-contentn-info-sidebar-container-content">
+            <div class="miscotizaciones-contentn-info-sidebar-container-content-head">
+              <div class="miscotizaciones-contentn-info-sidebar-container-content-head-title">
+                Descripcion solicitud
+              </div>
+              <div class="miscotizaciones-contentn-info-sidebar-container-content-head-description">
+                {{cotizacion.des_corta}}
+              </div>
+              <div *ngIf="cotizacion.des_larga"
+                class="miscotizaciones-contentn-info-sidebar-container-content-head-title">
+                Descripcion cotización
+              </div>
+              <div *ngIf="cotizacion.des_larga"
+                class="miscotizaciones-contentn-info-sidebar-container-content-head-description">
+                {{cotizacion.des_larga}}
+              </div>
+            </div>
+
+          </div>
+          <div class="miscotizaciones-contentn-info-sidebar-container-sidebar">
+            <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-general">
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info">
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-title">
+                  Asignado
+                </div>
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-info">
+                  <div *ngIf="cotizacion.remitente; else elseBlock">{{cotizacion.remitente}}</div>
+                  <ng-template #elseBlock>En espera...</ng-template>
+                  <!-- {{cotizacion.remitente}} -->
+                </div>
+              </div>
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info">
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-title">
+                  Solicitante
+                </div>
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-info">
+                  {{cotizacion.atencion}}
+                </div>
+              </div>
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info">
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-title">
+                  Empresa
+                </div>
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-info">
+                  {{empresa}}
+                </div>
+              </div>
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info">
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-title">
+                  Sitio
+                </div>
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-info">
+                  {{cotizacion.sitio}}
+                </div>
+              </div>
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info">
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-title"
+                  style="margin-bottom: 4px;">
+                  Equipos
+                </div>
+                <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-equipos">
+                  <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-info-equipo"
+                    *ngFor="let cot of cotizacion.equipos">
+                    {{cot.modelo}}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div  class="miscotizaciones-contentn-info-sidebar-container-sidebar-foot">
+              <div *ngIf="cotizacion.doc" class="miscotizaciones-contentn-info-sidebar-container-sidebar-foot-download">
+                <svg class="miscotizaciones-contentn-info-sidebar-container-sidebar-foot-icon"
+                  xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="#2e3133" viewBox="0 0 256 256">
+                  <rect width="256" height="256" fill="none"></rect>
+                  <path
+                    d="M74.3,85.7A8.1,8.1,0,0,1,85.7,74.3L120,108.7V24a8,8,0,0,1,16,0v84.7l34.3-34.4a8.1,8.1,0,0,1,11.4,11.4l-48,48a8.2,8.2,0,0,1-11.4,0ZM240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H84.4a3.6,3.6,0,0,1,2.8,1.2L111,145a24.1,24.1,0,0,0,34,0l23.8-23.8a3.6,3.6,0,0,1,2.8-1.2H224A16,16,0,0,1,240,136Zm-40,32a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z">
+                  </path>
+                </svg>
+                Descargar cotizacion
+              </div>
+
+
+              <div class="miscotizaciones-contentn-info-sidebar-container-sidebar-delete">
+                <!-- <img class="miscotizaciones-contentn-info-sidebar-container-sidebar-delete-icon"
+              src='../../../../../assets/trash.svg'> -->
+                <svg xmlns="http://www.w3.org/2000/svg"
+                  class="miscotizaciones-contentn-info-sidebar-container-sidebar-delete-icon" width="192" height="192"
+                  fill="#ffffff" viewBox="0 0 256 256">
+                  <rect width="256" height="256" fill="none"></rect>
+                  <path
+                    d="M216,48H176V40a24.1,24.1,0,0,0-24-24H104A24.1,24.1,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM112,168a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm0-120H96V40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z">
+                  </path>
+                </svg>
+                Eliminar
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
