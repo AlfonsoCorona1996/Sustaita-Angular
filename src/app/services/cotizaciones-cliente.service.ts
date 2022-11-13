@@ -13,8 +13,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class CotizacionesClienteService {
 
   public url;
-  $modal = new EventEmitter<boolean>();
-  $folio = new EventEmitter<string>();
+  // $modal = new EventEmitter<boolean>();
+  // $folio = new EventEmitter<string>();
 
 
   constructor(
@@ -24,6 +24,7 @@ export class CotizacionesClienteService {
 
   }
 
+  // ? Datos para card de cotizacion Kanban
   listar_cotizaciones_cliente(): Observable<cot_list[] | undefined> {
     const token = localStorage.getItem('token') || undefined;
     const helper = new JwtHelperService();
@@ -93,6 +94,8 @@ export class CotizacionesClienteService {
 
   }
 
+
+    // ? Datos completos de cotizacion cuando se hace click en card kanban
   listar_cotizacion_cliente_largas(folio:string): Observable<cot_larga[]> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.get<Cotizaciones>(this.url + `listar_cotizaciones_clientes/${folio}`, { headers: headers })
@@ -155,5 +158,14 @@ export class CotizacionesClienteService {
     return cot
 
   }
+
+
+
+
+
+
+
+
+
 
 }

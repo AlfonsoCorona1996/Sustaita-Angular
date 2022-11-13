@@ -6,6 +6,7 @@ import { Child_Cliente_Guard } from '../guards/child_cliente.guard';
 import { PrincipalClientComponent } from './cliente/principal-client.component';
 import { MisCotizacionesComponent } from './cliente/cotizaciones/mis-cotizaciones/mis-cotizaciones.component';
 import { FormsModule } from '@angular/forms';
+import { SolicitarCotizacionComponent } from './cliente/cotizaciones/solicitar-cotizacion/solicitar-cotizacion.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
     children: [
       {path: 'principal',component: PrincipalClientComponent},
       {path: 'mis-cotizaciones',component: MisCotizacionesComponent},
+      {path: 'solicitar-cotizacion',component: SolicitarCotizacionComponent},
       {path: '**',redirectTo: 'principal'}
     ]
   },

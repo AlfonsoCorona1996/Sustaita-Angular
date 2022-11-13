@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { permisos } from 'src/app/interfaces/cotizaciones.interfaces';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -54,6 +55,12 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    const token = localStorage.getItem('token') || undefined;
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(token);
+    console.log(decodedToken)
+    this.permisos.categorias = decodedToken.permisos.categorias
   }
 
   public logout() {
