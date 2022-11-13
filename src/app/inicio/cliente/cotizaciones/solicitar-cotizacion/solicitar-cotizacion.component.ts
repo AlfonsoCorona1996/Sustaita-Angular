@@ -31,4 +31,13 @@ export class SolicitarCotizacionComponent implements OnInit {
     this.empresa = decodedToken.empresa;
   }
 
+
+  select(opcion: string) {
+    // if(opcion != 'Fecha' && this.filter_list != ''){
+    //   this.filter_list = ''
+    //   this.buscador = ''
+    // }
+    // this.filter_option = opcion
+  }
+
 }

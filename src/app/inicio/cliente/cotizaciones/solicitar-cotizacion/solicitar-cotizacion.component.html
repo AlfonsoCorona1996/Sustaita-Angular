@@ -28,8 +28,10 @@
         <div class="solicitarcotizacion-container-side-data-title">
           Sitio
         </div>
-        <div *ngFor="let sitio of sitios" class="solicitarcotizacion-container-side-data-combo">
-          {{sitio.nombre}}
+        <div class="solicitarcotizacion-container-side-data-combo">
+          <select #opcion (change)="select(opcion.value)" class="solicitarcotizacion-container-side-data-combo-select">
+            <option *ngFor="let sitio of sitios" [value]="sitio.id">{{sitio.nombre}}</option>
+          </select>
         </div>
       </div>
 
@@ -38,7 +40,7 @@
           Equipos
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          Hola
+          Hola como estas
         </div>
       </div>
 
@@ -47,7 +49,7 @@
           Archivos
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          Hola
+          Hola como estas
         </div>
       </div>
 
