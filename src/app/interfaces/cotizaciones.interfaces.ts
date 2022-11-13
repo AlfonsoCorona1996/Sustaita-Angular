@@ -5,6 +5,10 @@ export interface Cotizaciones {
   data: cot[];
 }
 
+export interface Sitios {
+  data: sitio[];
+}
+
 export interface cot {
   _id: string;
   folio: string;
@@ -82,5 +86,22 @@ export interface sub_menu{
   descripcion: string,
   route: string,
   icon: string
+}
+
+
+export interface sitio{
+  _id: string;
+  empresa: string;
+  nombre: string;
+  direccion: string;
+  coordenadas: string;
+  jefes: [];
+  Equipos: [];
+  __v: number;
+}
+
+export interface sitio_combo{
+  nombre: string,
+  id: string
 }
 

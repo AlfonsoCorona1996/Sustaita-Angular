@@ -28,8 +28,8 @@
         <div class="solicitarcotizacion-container-side-data-title">
           Sitio
         </div>
-        <div class="solicitarcotizacion-container-side-data-combo">
-          Hola
+        <div *ngFor="let sitio of sitios" class="solicitarcotizacion-container-side-data-combo">
+          {{sitio.nombre}}
         </div>
       </div>
 

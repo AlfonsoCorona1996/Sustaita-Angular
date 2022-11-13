@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { GLOBAL } from './GLOBAL';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cotizaciones, cot, cot_list, cot_larga} from '../interfaces/cotizaciones.interfaces';
+import { Cotizaciones, cot, cot_list, cot_larga, sitio_combo, Sitios } from '../interfaces/cotizaciones.interfaces';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -24,13 +24,15 @@ export class CotizacionesClienteService {
 
   }
 
+//! MIS COTIZACIONES
+
   // ? Datos para card de cotizacion Kanban
   listar_cotizaciones_cliente(): Observable<cot_list[] | undefined> {
     const token = localStorage.getItem('token') || undefined;
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     const data = {
-      empresa:decodedToken.empresa
+      empresa:decodedToken.id_empresa
     };
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post<Cotizaciones>(this.url + 'listar_cotizaciones_clientes/',data,{headers:headers})
@@ -161,8 +163,38 @@ export class CotizacionesClienteService {
 
 
 
+//! SOLICITAR COTIZACION
 
+// ? Datos para card de cotizacion Kanban
+listar_sitios():Observable<sitio_combo[] | undefined> {
+  const token = localStorage.getItem('token') || undefined;
+  const helper = new JwtHelperService();
+  const decodedToken = helper.decodeToken(token);
+  const data = {
+    empresa:decodedToken.id_empresa
+  };
+  let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  return this._http.post<Sitios>(this.url + 'listar_sitios/',data,{headers:headers})
+  .pipe(
+    map(this.lista_sitios)
+  )
+}
 
+private lista_sitios(resp: Sitios):sitio_combo[] | undefined {
+  if(resp.data == undefined){
+    return undefined;
+  }
+  const sitio: sitio_combo[] = resp.data.map(sitio => {
+    return {
+      nombre: sitio.nombre,
+      id: sitio._id
+    }
+
+  })
+
+  return sitio
+
+}
 
 
 

@@ -59,7 +59,6 @@ export class HeaderComponent implements OnInit {
     const token = localStorage.getItem('token') || undefined;
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
-    console.log(decodedToken)
     this.permisos.categorias = decodedToken.permisos.categorias
   }
 
