@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PrincipalClientComponent } from './principal-client.component';
 import { CotizacionesPipePipe } from './cotizaciones-pipe.pipe';
 import { MisCotizacionesComponent } from './cotizaciones/mis-cotizaciones/mis-cotizaciones.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SolicitarCotizacionComponent } from './cotizaciones/solicitar-cotizacion/solicitar-cotizacion.component';
-
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -20,6 +20,8 @@ import { SolicitarCotizacionComponent } from './cotizaciones/solicitar-cotizacio
   imports: [
     CommonModule,
     FormsModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   exports: [
     PrincipalClientComponent,

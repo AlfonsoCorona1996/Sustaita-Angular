@@ -8,6 +8,14 @@ export interface Cotizaciones {
 export interface Sitios {
   data: sitio[];
 }
+export interface Equipos {
+  data: Equipo_res;
+}
+
+export interface Equipo_res{
+  _id: string
+  Equipos: Equipo[]
+}
 
 export interface cot {
   _id: string;
@@ -29,11 +37,14 @@ export interface cot {
 }
 
 export interface Equipo {
+  id: string;
+  marca: string;
   tipo: string;
   modelo: string;
   serie: string;
   capacidad: string;
   refrigerante: string;
+  manual: string;
 }
 
 export interface cot_list {

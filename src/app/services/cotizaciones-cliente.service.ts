@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { GLOBAL } from './GLOBAL';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cotizaciones, cot, cot_list, cot_larga, sitio_combo, Sitios } from '../interfaces/cotizaciones.interfaces';
+import { Cotizaciones, cot, cot_list, cot_larga, sitio_combo, Sitios, Equipo, Equipos, Equipo_res } from '../interfaces/cotizaciones.interfaces';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -165,7 +165,7 @@ export class CotizacionesClienteService {
 
 //! SOLICITAR COTIZACION
 
-// ? Datos para card de cotizacion Kanban
+// ? Combobox sitios
 listar_sitios():Observable<sitio_combo[] | undefined> {
   const token = localStorage.getItem('token') || undefined;
   const helper = new JwtHelperService();
@@ -193,6 +193,42 @@ private lista_sitios(resp: Sitios):sitio_combo[] | undefined {
   })
 
   return sitio
+
+}
+
+// ? Combobox equipos
+listar_equipos(id_sitio:string):Observable<Equipo_res | undefined> {
+  const data = {
+    sitio:id_sitio
+  };
+  let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  return this._http.post<Equipos>(this.url + 'listar_equipos/',data,{headers:headers})
+  .pipe(
+    map(this.lista_equipos)
+  )
+}
+
+private lista_equipos(resp: Equipos):Equipo_res | undefined {
+  if(resp.data == undefined){
+    return undefined;
+  }
+  // const equipo: Equipo_res = resp.data.map(equipo => {
+  //   return {
+  //     _id: equipo._id,
+  //     Equipos: equipo.Equipos
+  //     // id: equipo.id,
+  //     // marca: equipo.marca,
+  //     // modelo: equipo.modelo,
+  //     // serie: equipo.serie,
+  //     // tipo: equipo.tipo,
+  //     // capacidad: equipo.capacidad,
+  //     // refrigerante: equipo.refrigerante,
+  //     // manual: equipo.manual
+  //   }
+
+  // })
+
+  return resp.data
 
 }
 

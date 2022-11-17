@@ -20,6 +20,8 @@
   justify-content: flex-end;
 
   margin: 0 auto;
+
+  box-sizing: content-box;
 }
 
 .header-cont {
@@ -71,6 +73,7 @@
 
 .header-menu {
   display: flex;
+  margin-bottom: 0px;
 }
 
 .menu-check {

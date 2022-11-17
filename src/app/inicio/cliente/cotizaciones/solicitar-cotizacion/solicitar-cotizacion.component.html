@@ -19,7 +19,7 @@
         <input type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
       </div>
       <div class="solicitarcotizacion-container-cont-coments">
-        <textarea placeholder="Descripcion" name="" id="" cols="30" rows="10"
+        <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
           class="solicitarcotizacion-container-cont-coments-textarea"></textarea>
       </div>
     </div>
@@ -29,8 +29,11 @@
           Sitio
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          <select #opcion (change)="select(opcion.value)" class="solicitarcotizacion-container-side-data-combo-select">
-            <option *ngFor="let sitio of sitios" [value]="sitio.id">{{sitio.nombre}}</option>
+          <select [(ngModel)]="equipo_text" #opcion (change)="select(opcion.value)" id="sitio_combo"
+            class="solicitarcotizacion-container-side-data-combo-select">
+            <option *ngIf="sitios !== undefined && sitios.length > 1" hidden selected value="selecciona">Selecciona
+            </option>
+            <option *ngFor="let sitio of sitios" [value]="sitio.id"> {{sitio.nombre}}</option>
           </select>
         </div>
       </div>
@@ -40,7 +43,37 @@
           Equipos
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          Hola como estas
+          <!-- ! MOBILE -->
+          <select [disabled]="equipo_text=='selecciona'" (change)="equipos_select()" *ngIf="mobile" id="equipos-mobile"
+            class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple">
+            <!-- <option  hidden selected>Selecciona</option> -->
+            <option *ngFor="let equipo of equipos" [value]="equipo.id">{{equipo.modelo}}</option>
+          </select>
+          <!-- ! DESKTOP -->
+          <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" [formControl]="toppings"
+            (change)="equipos_select()" id="equipos-PC" multiple
+            class="solicitarcotizacion-container-side-data-combo-select-math" [style.background-color]="color_Equipo">
+            <mat-select-trigger>
+              <!-- {{toppings.value?.[0] || ''}} -->
+              <span class="example-additional-selection">
+                {{(toppings.value?.length || 0)}} {{toppings.value?.length === 1 ? 'equipo' : 'equipos'}}
+              </span>
+            </mat-select-trigger>
+            <mat-option *ngFor="let equipo of equipos" [value]="equipo.modelo" (click)="equipos_select()">
+              {{equipo.modelo}}</mat-option>
+          </mat-select>
+          añadir sitio
+        </div>
+      </div>
+
+      <div class="solicitarcotizacion-container-side-data">
+        <div class="solicitarcotizacion-container-side-data-title">
+          Refacciones
+        </div>
+        <div class="solicitarcotizacion-container-side-data-refacciones">
+          <div class="solicitarcotizacion-container-side-data-refacciones-button">
+            Seleccionar
+          </div>
         </div>
       </div>
 
@@ -49,7 +82,8 @@
           Archivos
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          Hola como estas
+
+
         </div>
       </div>
 
