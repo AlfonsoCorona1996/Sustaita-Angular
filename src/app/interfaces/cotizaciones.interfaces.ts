@@ -17,6 +17,18 @@ export interface Equipo_res{
   Equipos: Equipo[]
 }
 
+export interface Refacciones{
+  data:Refaccion[]
+}
+
+export interface Refaccion{
+  nombre: string;
+  part: string;
+  tipo: [],
+  para:[],
+  __v: number;
+}
+
 export interface cot {
   _id: string;
   folio: string;
@@ -45,6 +57,7 @@ export interface Equipo {
   capacidad: string;
   refrigerante: string;
   manual: string;
+  refacciones: []
 }
 
 export interface cot_list {

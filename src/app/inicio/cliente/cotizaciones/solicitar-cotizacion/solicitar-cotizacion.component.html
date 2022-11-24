@@ -59,7 +59,7 @@
                 {{(toppings.value?.length || 0)}} {{toppings.value?.length === 1 ? 'equipo' : 'equipos'}}
               </span>
             </mat-select-trigger>
-            <mat-option *ngFor="let equipo of equipos" [value]="equipo.modelo" (click)="equipos_select()">
+            <mat-option *ngFor="let equipo of equipos" [value]="equipo.refacciones">
               {{equipo.modelo}}</mat-option>
           </mat-select>
           añadir sitio
@@ -71,7 +71,7 @@
           Refacciones
         </div>
         <div class="solicitarcotizacion-container-side-data-refacciones">
-          <div class="solicitarcotizacion-container-side-data-refacciones-button">
+          <div class="solicitarcotizacion-container-side-data-refacciones-button" (click)="equipos_select()">
             Seleccionar
           </div>
         </div>

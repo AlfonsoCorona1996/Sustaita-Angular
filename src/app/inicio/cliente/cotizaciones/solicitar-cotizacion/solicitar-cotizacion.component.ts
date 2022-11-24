@@ -19,6 +19,7 @@ export class SolicitarCotizacionComponent implements OnInit {
   public equipo_disabled: boolean = true;
   public equipo_text: string = "selecciona"
   public color_Equipo: string = "#f6f8fa"
+  public refacciones: Array<string> = []
 
   constructor(
     private _cotizaciones_clienteService: CotizacionesClienteService
@@ -65,7 +66,19 @@ export class SolicitarCotizacionComponent implements OnInit {
   }
 
   equipos_select() {
-    console.log(this.toppings)
+    if (this.toppings.value) {
+      this.refacciones = []
+      for (const list of this.toppings.value) {
+        this.refacciones = this.refacciones.concat(list)
+      }
+      this.refacciones = this.refacciones.filter((item, pos) => this.refacciones.indexOf(item) === pos)
+      this._cotizaciones_clienteService.listar_refacciones(this.refacciones).subscribe({
+        next: (v) => {
+          console.log(v)
+        },
+        error: (e) => console.error(e)
+      });
+    }
     // const combo = document.getElementById(id)
     // const sitio = document.getElementById("sitio_combo") as HTMLInputElement;
     // console.log(combo && sitio.value != "selecciona")

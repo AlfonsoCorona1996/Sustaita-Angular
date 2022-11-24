@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { GLOBAL } from './GLOBAL';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Cotizaciones, cot, cot_list, cot_larga, sitio_combo, Sitios, Equipo, Equipos, Equipo_res } from '../interfaces/cotizaciones.interfaces';
+import { Cotizaciones, cot, cot_list, cot_larga, sitio_combo, Sitios, Equipo, Equipos, Equipo_res, Refaccion, Refacciones } from '../interfaces/cotizaciones.interfaces';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 
@@ -212,25 +212,18 @@ private lista_equipos(resp: Equipos):Equipo_res | undefined {
   if(resp.data == undefined){
     return undefined;
   }
-  // const equipo: Equipo_res = resp.data.map(equipo => {
-  //   return {
-  //     _id: equipo._id,
-  //     Equipos: equipo.Equipos
-  //     // id: equipo.id,
-  //     // marca: equipo.marca,
-  //     // modelo: equipo.modelo,
-  //     // serie: equipo.serie,
-  //     // tipo: equipo.tipo,
-  //     // capacidad: equipo.capacidad,
-  //     // refrigerante: equipo.refrigerante,
-  //     // manual: equipo.manual
-  //   }
-
-  // })
-
   return resp.data
-
 }
+
+// ? Lista de refacciones segun equipos seleccionados // Solicitar cotizacion
+listar_refacciones(refacciones:string[]):Observable<Refacciones | undefined> {
+  const data = {
+    refacciones:refacciones
+  };
+  let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  return this._http.post<Refacciones>(this.url + 'listar_refacciones/',data,{headers:headers})
+}
+
 
 
 
