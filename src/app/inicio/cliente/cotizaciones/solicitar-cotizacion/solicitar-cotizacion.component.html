@@ -35,7 +35,11 @@
             </option>
             <option *ngFor="let sitio of sitios" [value]="sitio.id"> {{sitio.nombre}}</option>
           </select>
+          <div class="solicitarcotizacion-container-side-data-add">
+            Añadir nuevo sitio
+          </div>
         </div>
+
       </div>
 
       <div class="solicitarcotizacion-container-side-data">
@@ -44,36 +48,48 @@
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
           <!-- ! MOBILE -->
-          <select [disabled]="equipo_text=='selecciona'" (change)="equipos_select()" *ngIf="mobile" id="equipos-mobile"
-            class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple">
+          <select [disabled]="equipo_text=='selecciona'" *ngIf="mobile" id="equipos-mobile"
+            class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple"
+            [(ngModel)]="equipos_selected">
+            <!-- class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple" [formControl]="toppings"> -->
             <!-- <option  hidden selected>Selecciona</option> -->
-            <option *ngFor="let equipo of equipos" [value]="equipo.id">{{equipo.modelo}}</option>
+            <option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.modelo}}</option>
           </select>
           <!-- ! DESKTOP -->
-          <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" [formControl]="toppings"
+          <!-- <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" formControlName="parts" -->
+          <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" [(ngModel)]="equipos_selected"
             (change)="equipos_select()" id="equipos-PC" multiple
             class="solicitarcotizacion-container-side-data-combo-select-math" [style.background-color]="color_Equipo">
             <mat-select-trigger>
               <!-- {{toppings.value?.[0] || ''}} -->
               <span class="example-additional-selection">
-                {{(toppings.value?.length || 0)}} {{toppings.value?.length === 1 ? 'equipo' : 'equipos'}}
+                {{(equipos_selected.length || 0)}} {{equipos_selected.length === 1 ? 'equipo' : 'equipos'}}
               </span>
             </mat-select-trigger>
-            <mat-option *ngFor="let equipo of equipos" [value]="equipo.refacciones">
+            <mat-option *ngFor="let equipo of equipos" [value]="equipo">
               {{equipo.modelo}}</mat-option>
           </mat-select>
-          añadir sitio
+          <div class="solicitarcotizacion-container-side-data-add">
+            Añadir nuevo equipo
+          </div>
         </div>
       </div>
 
       <div class="solicitarcotizacion-container-side-data">
         <div class="solicitarcotizacion-container-side-data-title">
-          Refacciones
+          Refacciones y servicios
         </div>
         <div class="solicitarcotizacion-container-side-data-refacciones">
-          <div class="solicitarcotizacion-container-side-data-refacciones-button" (click)="equipos_select()">
-            Seleccionar
-          </div>
+          <label class="header-button" style="cursor: pointer;">
+            <input type="checkbox" class="menu-check" style="display: none;" id="add-refaccion"
+              [disabled]="refacciones_part_list.length == 0">
+            <div class="solicitarcotizacion-container-side-data-refacciones-button" (click)="equipos_select()">
+              Seleccionar
+            </div>
+          </label>
+        </div>
+        <div class="solicitarcotizacion-container-side-data-add">
+          {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
         </div>
       </div>
 
@@ -86,6 +102,283 @@
 
         </div>
       </div>
+
+    </div>
+  </div>
+
+
+  <div class="solicitarcotizacion-content-refacciones-back" id="details">
+    <div class="solicitarcotizacion-content-refacciones-card">
+
+
+      <div class="solicitarcotizacion-content-refacciones-card-close">
+
+        <img class="solicitarcotizacion-content-refacciones-card-close-icon" src='../../../../../assets/xmark-solid.svg'
+          (click)="close_refaccion_card()">
+      </div>
+
+      <div class="solicitarcotizacion-content-refacciones-card-title refacciones-add">
+        Refacciones
+        <div class="solicitarcotizacion-content-refacciones-card-title-description">
+          Selecciona las refacciones que serán agregadas a la cotización.
+          <hr>
+        </div>
+      </div>
+
+      <div class="solicitarcotizacion-content-refacciones-card-title servicios-add">
+        Refacciones
+        <div class="solicitarcotizacion-content-refacciones-card-title-description">
+          Escoge si deseas incluir instalación, en caso contrario se contemplará envio.
+          <hr>
+        </div>
+      </div>
+
+
+      <div class="solicitarcotizacion-content-refacciones-card-container refacciones-add">
+        <div class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-div">
+          <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
+            src='../../../../../assets/magnifying-glass-solid.svg'>
+          <input type="text" placeholder="Buscar refacciones..."
+            class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
+        </div>
+        <div class="solicitarcotizacion-content-refacciones-card-content">
+
+          <div class="solicitarcotizacion-content-refacciones-card-content-list">
+            <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-div">
+            <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
+              src='../../../../../assets/magnifying-glass-solid.svg'>
+            <input type="text" placeholder="Buscar refacciones..."
+              class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
+          </div> -->
+
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
+              Refacciones para equipos seleccionados
+              <div
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion solicitarcotizacion-refaccion-refaccion-add">
+                <img
+                  class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                  src='../../../../../assets/plus-solid.svg'
+                  style="filter: invert(35%) sepia(76%) saturate(3238%) hue-rotate(181deg) brightness(96%) contrast(101%); margin: 8px;">
+              </div>
+            </div>
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones">
+              <div
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion animate__animated animate__flipInX animate__faster"
+                *ngFor="let refaccion of refacciones_info_list ; let i = index; trackBy: trackItem"
+                [attr.data-index]="i" [attr.id]="i">
+                <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont">
+
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                      {{refaccion.nombre}}
+                    </div>
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-number">
+                        {{refaccion.part}}
+                      </div>
+                    </div>
+
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-model"
+                        *ngFor="let equipo of refaccion.equipos" [title]="equipo">
+                        {{equipo}}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right">
+                    <label class="header-button" style="cursor: pointer; " (click)="focus(i + 'cant')">
+                      <!-- <label class="header-button" style="cursor: pointer;" (click)="focus(i + 'cant')"> -->
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon-cont">
+                        <input type="checkbox" class="menu-check" style="display: none;" [attr.id]="i + 'check'">
+                        <img
+                          class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                          src='../../../../../assets/plus-solid.svg'>
+                      </div>
+                    </label>
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-cant">
+                      <input type="number" inputmode="numeric" pattern="[0-9]{2}" maxlength="2"
+                        onKeyPress="if(this.value.length==2) return false;"
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-cant-input"
+                        [attr.id]="i + 'cant'">
+                    </div>
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-aceptar"
+                      (click)="addRefaccion(i)">
+                      <img
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/check-solid.svg'>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
+            Otras refacciones
+          </div> -->
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones">
+
+            </div>
+          </div>
+          <div class="solicitarcotizacion-content-refacciones-card-content-list">
+            <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-div">
+            <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
+              src='../../../../../assets/magnifying-glass-solid.svg'>
+            <input type="text" placeholder="Buscar refacciones..."
+              class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
+          </div> -->
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
+              Refacciones seleccionadas
+            </div>
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones">
+              <div
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion animate__animated animate__flipInX animate__faster"
+                *ngFor="let refaccion of refacciones_select_list; let i = index; trackBy: trackItem"
+                [attr.data-index]="i">
+                <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont">
+
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                      {{refaccion.nombre}}
+                    </div>
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-number">
+                        {{refaccion.part}}
+                      </div>
+                    </div>
+
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-model"
+                        *ngFor="let equipo of refaccion.equipos" [title]="equipo">
+                        {{equipo}}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right">
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-cant selected-refaccion">
+                      <input type="number" inputmode="numeric" pattern="[0-9]{2}" maxlength="2"
+                        onKeyPress="if(this.value.length==2) return false;"
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-cant-input selected-refaccion"
+                        [value]="refaccion.cant" disabled>
+                    </div>
+
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon-cont"
+                      style="background-color: #E03F32; margin-right: 8px;" (click)="deleteRefaccion(i)">
+                      <img
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/icons8-trash.svg'>
+                    </div>
+
+
+                    <!-- <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-aceptar">
+                      <img
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/check-solid.svg'>
+                    </div> -->
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="solicitarcotizacion-content-refacciones-card-container servicios-add">
+        <div class="solicitarcotizacion-content-refacciones-card-content">
+          <div class="solicitarcotizacion-content-refacciones-card-content-list">
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
+              Refacciones seleccionadas
+            </div>
+            <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones">
+
+              <div
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion animate__animated animate__flipInX animate__faster"
+                *ngFor="let refaccion of refacciones_select_list; let i = index; trackBy: trackItem"
+                [attr.data-index]="i">
+                <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont">
+
+                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right chossen-refacciones">
+                    {{refaccion.cant}}
+                  </div>
+                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                      {{refaccion.nombre}}
+                    </div>
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-number">
+                        {{refaccion.part}}
+                      </div>
+                    </div>
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
+                      <div
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-model"
+                        *ngFor="let equipo of refaccion.equipos" [title]="equipo">
+                        {{equipo}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right ">
+                    <label class="chossen-refacciones-instalacion" (click)="install(i)">
+                    <div class="chossen-instalacion-label">
+                      ¿Incluir instalación?
+                    </div>
+                    <input type="checkbox" [attr.id]="i + 'install'" [checked]="refaccion.install">
+                  </label>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="solicitarcotizacion-content-refacciones-card-container-footer">
+        <div class="solicitarcotizacion-content-refacciones-card-container-before">
+          <label (click)="finish()">
+            <input type="checkbox" class="menu-check" style="display: none;" id="next-refaccion">
+            <div class="solicitarcotizacion-content-refacciones-card-container-next-button"
+              style="background-color: #14b76e;">
+              Finalizar
+            </div>
+          </label>
+        </div>
+        <div class="solicitarcotizacion-content-refacciones-card-container-next">
+          <label>
+            <div class="solicitarcotizacion-content-refacciones-card-container-next-button">
+              <div class="siguiente-refaccines">
+                Siguiente
+              </div>
+              <div class="regresar-refacciones">
+                Anterior
+              </div>
+            </div>
+            <input type="checkbox" class="menu-check" style="display: none;" id="next-refaccion">
+          </label>
+        </div>
+
+      </div>
+
+
 
     </div>
   </div>

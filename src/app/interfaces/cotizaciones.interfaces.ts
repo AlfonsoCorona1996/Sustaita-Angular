@@ -22,8 +22,22 @@ export interface Refacciones{
 }
 
 export interface Refaccion{
+  _id: string;
   nombre: string;
   part: string;
+  tipo: [],
+  para:[],
+  __v: number;
+  equipos: string[];
+}
+
+export interface Refaccion_cot{
+  nombre: string;
+  part: string;
+  id_refaccion:string;
+  cant: number;
+  install: boolean;
+  equipos: string[];
   tipo: [],
   para:[],
   __v: number;

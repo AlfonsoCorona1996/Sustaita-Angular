@@ -6,6 +6,7 @@ import { MisCotizacionesComponent } from './cotizaciones/mis-cotizaciones/mis-co
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SolicitarCotizacionComponent } from './cotizaciones/solicitar-cotizacion/solicitar-cotizacion.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -21,7 +22,8 @@ import {MatSelectModule} from '@angular/material/select';
     CommonModule,
     FormsModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTabsModule
   ],
   exports: [
     PrincipalClientComponent,
@@ -33,3 +35,4 @@ import {MatSelectModule} from '@angular/material/select';
   ]
 })
 export class ClienteModule { }
+
