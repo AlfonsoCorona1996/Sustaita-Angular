@@ -133,20 +133,40 @@ export class SolicitarCotizacionComponent implements OnInit {
         position: 'topRight',
         message: 'Selecciona sitio y equipo(s)',
       });
-
+      this.refacciones_info_list = []
+      this.refacciones_part_list = []
     }
     //* Regresar el tap de refacciones a la primera
     const checkbox = document.getElementById("next-refaccionn") as HTMLInputElement | null;
-    if (checkbox){
-      console.log ("aqui")
+    if (checkbox) {
+      console.log("aqui")
       checkbox.checked = false
     }
   }
 
-  open_refacciones_selected(){
-    const checkbox = document.getElementById("add-refaccion") as HTMLInputElement | null;
-    if (checkbox){
-      checkbox.checked = true
+
+  open_refacciones_selected() {
+    if (this.refacciones_info_list.length > 0) {
+      const checkbox = document.getElementById("add-refaccion") as HTMLInputElement | null;
+      const checkbox2 = document.getElementById("next-refaccionn") as HTMLInputElement | null;
+      if (checkbox && checkbox2) {
+        checkbox.checked = true
+        checkbox2.checked= true
+      }
+    }
+    else {
+      iziToast.show({
+        title: 'Error:',
+        titleColor: '#FF0000',
+        timeout: 3000,
+        messageColor: '#051b34',
+        color: '#FFFFFF',
+        progressBarColor: '#0087d4',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'Selecciona sitio y equipo(s)',
+      });
+
     }
   }
 
