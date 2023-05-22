@@ -29,7 +29,7 @@
           Sitio
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          <select [(ngModel)]="equipo_text" #opcion (change)="select(opcion.value)" id="sitio_combo"
+          <select [(ngModel)]="equipo_text" #opcion (change)="select(opcion.value, opcion.options[opcion.options.selectedIndex].text)" id="sitio_combo"
             class="solicitarcotizacion-container-side-data-combo-select">
             <option *ngIf="sitios !== undefined && sitios.length > 1" hidden selected value="selecciona">Selecciona
             </option>
@@ -88,7 +88,7 @@
             </div>
           </label>
         </div>
-        <div class="solicitarcotizacion-container-side-data-add">
+        <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
           {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
         </div>
       </div>
@@ -263,6 +263,11 @@
                         {{equipo}}
                       </div>
                     </div>
+                    <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-place">
+
+                        {{refaccion.sitio.nombre}}
+
+                    </div> -->
                   </div>
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right">
@@ -334,6 +339,11 @@
                         {{equipo}}
                       </div>
                     </div>
+                    <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-place">
+
+                      {{refaccion.sitio.nombre}}
+
+                  </div> -->
                   </div>
                   <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right ">
                     <label class="chossen-refacciones-instalacion" (click)="install(i)">
@@ -372,7 +382,7 @@
                 Anterior
               </div>
             </div>
-            <input type="checkbox" class="menu-check" style="display: none;" id="next-refaccion">
+            <input type="checkbox" class="menu-check" style="display: none;" id="next-refaccionn">
           </label>
         </div>
 

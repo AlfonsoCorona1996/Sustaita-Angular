@@ -5,6 +5,7 @@ import { Equipo, sitio_combo, Equipo_res, Refacciones, Refaccion, Refaccion_cot,
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 
+
 declare var iziToast: any;
 
 @Component({
@@ -17,6 +18,7 @@ export class SolicitarCotizacionComponent implements OnInit {
   public empresa: string = '';
   public sitios: Array<sitio_combo> | undefined = [];
   public equipos: Array<Equipo> | undefined = [];
+  public sitio_selected: sitio_combo = { nombre: "TBD", id: "TBD" };
   // public toppings = new FormControl('');
   public mobile: boolean = true;
   public equipo_disabled: boolean = true;
@@ -26,6 +28,11 @@ export class SolicitarCotizacionComponent implements OnInit {
   public refacciones_part_list: Array<string> = []
   public refacciones_info_list: Array<Refaccion> = []
   public refacciones_select_list: Array<Refaccion_cot> = []
+
+
+
+
+
 
   constructor(
     private _cotizaciones_clienteService: CotizacionesClienteService
@@ -53,10 +60,15 @@ export class SolicitarCotizacionComponent implements OnInit {
     }
   }
 
-
-  select(opcion: string) {
-    if (opcion != "selecciona") {
-      this._cotizaciones_clienteService.listar_equipos(opcion).subscribe({
+  // ! Funcion para obtener los equipos del siitio seleccionado
+  // ? Recibe el value = id de sitio y el text = nombre del sitio para agregarlo en los datos de las refacciones futuramente agregadas
+  select(value: string, text: string) {
+    if (value != "selecciona") {
+      this.sitio_selected = {
+        nombre: text,
+        id: value
+      }
+      this._cotizaciones_clienteService.listar_equipos(value).subscribe({
         next: (v) => {
           this.equipos = v?.Equipos;
         },
@@ -65,15 +77,17 @@ export class SolicitarCotizacionComponent implements OnInit {
       this.color_Equipo = "#FFFFFF"
 
     } else {
+      this.sitio_selected = { nombre: "TBD", id: "TBD" };
       this.equipos = []
       this.color_Equipo = "#F6F8FA"
     }
     // this.toppings = new FormControl('');
     // this.refacciones_part_list = []
     this.equipos_selected = []
+    this.refacciones_select_list = []
   }
 
-
+  // !Funcion para obtener los equipos del siitio seleccionado
   equipos_select() {
     if (this.equipos_selected.length > 0) {
       this.refacciones_part_list = []
@@ -121,46 +135,31 @@ export class SolicitarCotizacionComponent implements OnInit {
       });
 
     }
-    // if (this.toppings.value) {
-    //   this.equipos_selected = this.toppings.value
-    //   this.refacciones_part_list = []
-    //   for (const list of this.equipos_selected) {
-    //     this.refacciones_part_list = this.refacciones_part_list.concat(list)
-    //   }
-    //   this.refacciones_part_list = this.refacciones_part_list.filter((item, pos) => this.refacciones_part_list.indexOf(item) === pos)
-    //   this._cotizaciones_clienteService.listar_refacciones(this.refacciones_part_list).subscribe({
-    //     next: (v) => {
-    //       if(v  && v.data){
-    //         this.refacciones_info_list = v.data
-    //       }else{
-    //         this.refacciones_info_list = []
-    //       }
-    //     },
-    //     error: (e) => console.error(e)
-    //   });
-    // }
-
-
-    // const combo = document.getElementById(id)
-    // const sitio = document.getElementById("sitio_combo") as HTMLInputElement;
-    // console.log(combo && sitio.value != "selecciona")
-    // if(combo && sitio.value != "selecciona"){
-    //   this.equipo_disabled = false;
-    //   combo.style.color = 'white'
-    // }
-    // else{
-    //   this.equipo_disabled = true
-    // }
+    //* Regresar el tap de refacciones a la primera
+    const checkbox = document.getElementById("next-refaccionn") as HTMLInputElement | null;
+    if (checkbox){
+      console.log ("aqui")
+      checkbox.checked = false
+    }
   }
 
+  open_refacciones_selected(){
+    const checkbox = document.getElementById("add-refaccion") as HTMLInputElement | null;
+    if (checkbox){
+      checkbox.checked = true
+    }
+  }
+
+  // ! Funcion para cerrar el popup de seleccionar refaccion (no se si borrar [] de refacciones seleccionadas)
   close_refaccion_card() {
     const close = document.getElementById("add-refaccion") as HTMLInputElement | null;
     if (close) {
       close.checked = false
     }
-    this.refacciones_select_list = []
+    // this.refacciones_select_list = []
   }
 
+  // ! Funcion para cerrar el popup de seleccionar refaccion desde boton finalizar
   finish() {
     const close = document.getElementById("add-refaccion") as HTMLInputElement | null;
     if (close) {
@@ -168,6 +167,8 @@ export class SolicitarCotizacionComponent implements OnInit {
     }
   }
 
+  // ! Funcion para agregar si la refaccion contempla instalacion o no
+  // ? Recibe id = index del array
   install(id: number) {
     const install = document.getElementById(id + 'install') as HTMLInputElement | null;
     if (install) {
@@ -179,6 +180,8 @@ export class SolicitarCotizacionComponent implements OnInit {
     }
   }
 
+  // ! Funcion para pasar refacccion del [] general al [] de refacciones seleccionadas
+  // ? Recibe index = index del []
   addRefaccion(index: number) {
     const cant: number = +(<HTMLInputElement>document.getElementById(index + 'cant')).value;
     if (cant > 0 && cant < 99) {
@@ -192,7 +195,8 @@ export class SolicitarCotizacionComponent implements OnInit {
         equipos: this.refacciones_info_list[index].equipos,
         tipo: this.refacciones_info_list[index].tipo,
         para: this.refacciones_info_list[index].para,
-        __v: this.refacciones_info_list[index].__v
+        __v: this.refacciones_info_list[index].__v,
+        sitio: this.sitio_selected
       }
       // this.refacciones_info_list[index]
       this.refacciones_info_list.splice(index, 1)
@@ -220,6 +224,8 @@ export class SolicitarCotizacionComponent implements OnInit {
 
   }
 
+  // ! Funcion para borrar una refaccion de las refacciones seleccionadas y regresarla al [] general
+  // ? Recibe index = index de []
   deleteRefaccion(index: number) {
     const newRefaccion: Refaccion = {
       _id: this.refacciones_select_list[index].id_refaccion,

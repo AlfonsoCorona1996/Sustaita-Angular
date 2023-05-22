@@ -35,6 +35,7 @@ export interface Refaccion_cot{
   nombre: string;
   part: string;
   id_refaccion:string;
+  sitio: sitio_combo;
   cant: number;
   install: boolean;
   equipos: string[];

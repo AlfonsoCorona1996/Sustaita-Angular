@@ -10,7 +10,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 
 
-
 @NgModule({
   declarations: [
     PrincipalClientComponent,
@@ -23,7 +22,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   exports: [
     PrincipalClientComponent,
