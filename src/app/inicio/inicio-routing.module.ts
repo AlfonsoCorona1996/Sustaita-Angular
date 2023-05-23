@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { SolicitarCotizacionComponent } from './cliente/cotizaciones/solicitar-cotizacion/solicitar-cotizacion.component';
 
 
+
 const routes: Routes = [
   {
     path: 'inicio',

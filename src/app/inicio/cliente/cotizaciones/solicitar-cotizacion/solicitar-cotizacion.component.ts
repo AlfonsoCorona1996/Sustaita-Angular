@@ -5,6 +5,9 @@ import { Equipo, sitio_combo, Equipo_res, Refacciones, Refaccion, Refaccion_cot,
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
 
+interface HTMLInputEvent extends Event {
+  target: HTMLInputElement & EventTarget;
+}
 
 declare var iziToast: any;
 
@@ -28,6 +31,9 @@ export class SolicitarCotizacionComponent implements OnInit {
   public refacciones_part_list: Array<string> = []
   public refacciones_info_list: Array<Refaccion> = []
   public refacciones_select_list: Array<Refaccion_cot> = []
+  public selectedFiles: Array<File> = []
+
+
 
 
 
@@ -258,6 +264,75 @@ export class SolicitarCotizacionComponent implements OnInit {
     }
     this.refacciones_select_list.splice(index, 1);
     this.refacciones_info_list.push(newRefaccion);
+  }
+
+
+  fileChangeEvent(evento: Event){
+    var file;
+    const isThereFile = evento.target as HTMLInputElement;
+    if (isThereFile && isThereFile.files && isThereFile.files[0]){
+      for(let i = 0; i < isThereFile.files.length; i++){
+        // file = <File>isThereFile.files[0];
+        const file = <File>isThereFile.files[i];
+
+        if(file.size <= 4000000){
+          var exist:boolean = false
+          for(let f of this.selectedFiles){
+            console.log(file)
+            if(f.name == file.name && f.size == file.size){
+              exist = true
+              break
+            }
+          }
+          if (exist){
+            console.log("ya esta")
+            iziToast.show({
+              title: 'Error:',
+              titleColor: '#FF0000',
+              timeout: 3000,
+              messageColor: '#051b34',
+              color: '#FFFFFF',
+              progressBarColor: '#0087d4',
+              class: 'text-danger',
+              position: 'topRight',
+              message: 'El archivo '+ file.name +' ya fue seleccionado',
+            });
+          }else{
+            this.selectedFiles.push(file)
+          }
+
+        }else{
+          iziToast.show({
+            title: 'Error:',
+            titleColor: '#FF0000',
+            timeout: 3000,
+            messageColor: '#051b34',
+            color: '#FFFFFF',
+            progressBarColor: '#0087d4',
+            class: 'text-danger',
+            position: 'topRight',
+            message: file.name +', no pudo ser agregado por que es mayor a 4MB',
+          });
+        //  const inputFile = document.getElementById("file-input") as HTMLInputElement | null;;
+        //  if (inputFile){
+        //   inputFile.value = ''
+        //  }
+        }
+      }
+
+    }else{
+      iziToast.show({
+        title: 'Error:',
+        titleColor: '#FF0000',
+        timeout: 3000,
+        messageColor: '#051b34',
+        color: '#FFFFFF',
+        progressBarColor: '#0087d4',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'No seleccionaste ningun archivo',
+      });
+    }
   }
 
   async focus(id: string) {

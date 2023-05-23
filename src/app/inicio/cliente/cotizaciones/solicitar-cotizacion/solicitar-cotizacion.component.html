@@ -21,7 +21,7 @@
       <div class="solicitarcotizacion-container-cont-coments" style="z-index: 0;">
         <!-- <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
           class="solicitarcotizacion-container-cont-coments-textarea"></textarea> -->
-          <!-- <editor
+        <!-- <editor
           [init]="{
             height: 500,
             menubar: false,
@@ -37,8 +37,7 @@
           }"
           initialValue="Welcome to TinyMCE Angular"
         ></editor> -->
-        <editor
-        [init]="{
+        <editor [init]="{
           height: 390,
           menubar: false,
           language: 'es',
@@ -54,10 +53,8 @@
            'undo redo | casechange blocks | bold italic forecolor| \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist checklist outdent indent'
-        }"
-
-      ></editor>
-          <!-- initialValue="Descripcion" va dentro del editor -->
+        }"></editor>
+        <!-- initialValue="Descripcion" va dentro del editor -->
 
       </div>
     </div>
@@ -67,7 +64,8 @@
           Sitio
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-          <select [(ngModel)]="equipo_text" #opcion (change)="select(opcion.value, opcion.options[opcion.options.selectedIndex].text)" id="sitio_combo"
+          <select [(ngModel)]="equipo_text" #opcion
+            (change)="select(opcion.value, opcion.options[opcion.options.selectedIndex].text)" id="sitio_combo"
             class="solicitarcotizacion-container-side-data-combo-select">
             <option *ngIf="sitios !== undefined && sitios.length > 1" hidden selected value="selecciona">Selecciona
             </option>
@@ -118,16 +116,22 @@
           Refacciones
         </div>
         <div class="solicitarcotizacion-container-side-data-refacciones">
-          <label class="header-button" style="cursor: pointer;">
+          <label class="solicitarcotizacion-container-side-data-refacciones-button" style="cursor: pointer;"
+            (click)="equipos_select()">
             <input type="checkbox" class="menu-check" style="display: none;" id="add-refaccion"
               [disabled]="refacciones_part_list.length == 0">
-            <div class="solicitarcotizacion-container-side-data-refacciones-button" (click)="equipos_select()">
-              Seleccionar
-            </div>
+
+            <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+              src='../../../../../assets/screwdriver-wrench-solid.svg' style="margin: 5px 10px 5px 0px;">
+            Seleccionar refacciones
+
           </label>
         </div>
-        <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
-          {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
+        <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="margin-bottom: 16px;">
+          <div class="solicitarcotizacion-container-side-data-upladFiles-list-head"
+            (click)="open_refacciones_selected()" style="cursor: pointer;">
+            {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
+          </div>
         </div>
       </div>
 
@@ -136,9 +140,54 @@
           Archivos
         </div>
         <div class="solicitarcotizacion-container-side-data-combo">
-
-
+          <label class="solicitarcotizacion-container-side-data-upladFiles" style="cursor: pointer;">
+            <input type="file" id="file-input" (change)="fileChangeEvent($event)" multiple="multiple">
+            <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+              src='../../../../../assets/cloud-arrow-up-solid.svg' style="margin: 5px 10px 5px 0px;">
+            Elegir archivo(s)
+          </label>
         </div>
+        <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="padding: 0px;">
+          <div class="solicitarcotizacion-container-side-data-upladFiles-list-head">
+            {{selectedFiles.length}} archivo(s) seleccionado(s)
+          </div>
+          <div style="margin: 0px 4px;">
+          <table style="border-collapse: separate;
+          border-spacing: 0px 4px;">
+
+
+            <tbody class="solicitarcotizacion-container-side-data-upladFiles-list-items">
+
+              <tr class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+                *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
+
+
+                  <td *ngIf="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'">
+                    <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                    src='../../../../../assets/image-solid.svg' style="margin: 4px;">
+                  </td>
+
+
+                <td class="solicitarcotizacion-container-side-data-upladFiles-list-items-item-text">{{file.name}}</td>
+
+                <td>
+                  <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                  src='../../../../../assets/xmark-solid.svg' style="margin: 4px;">
+                </td>
+
+              </tr>
+
+              <!-- <div class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+            *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
+            {{file.type}} {{file.name}} close
+            </div> -->
+
+            </tbody>
+          </table>
+        </div>
+        <!-- <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
+          {{selectedFiles.length}} archivo(s) seleccionado(s)
+        </div> -->
       </div>
 
     </div>
@@ -357,10 +406,12 @@
                 [attr.data-index]="i">
                 <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont">
 
-                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right chossen-refacciones">
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right chossen-refacciones">
                     {{refaccion.cant}}
                   </div>
-                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
@@ -383,13 +434,14 @@
 
                   </div> -->
                   </div>
-                  <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right ">
+                  <div
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right ">
                     <label class="chossen-refacciones-instalacion" (click)="install(i)">
-                    <div class="chossen-instalacion-label">
-                      ¿Incluir instalación?
-                    </div>
-                    <input type="checkbox" [attr.id]="i + 'install'" [checked]="refaccion.install">
-                  </label>
+                      <div class="chossen-instalacion-label">
+                        ¿Incluir instalación?
+                      </div>
+                      <input type="checkbox" [attr.id]="i + 'install'" [checked]="refaccion.install">
+                    </label>
                   </div>
                 </div>
 

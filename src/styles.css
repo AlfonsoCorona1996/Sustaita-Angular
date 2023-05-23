@@ -55,4 +55,9 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
+/* ! ELIMINAR LA NOTIFICACION DEL Tiny (keyboard) */
 .tox-notification { display: none !important }
+
+input[type="file"] {
+  display: none;
+}

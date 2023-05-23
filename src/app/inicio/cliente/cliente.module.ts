@@ -10,7 +10,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 
 
 import { BrowserModule } from '@angular/platform-browser';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
