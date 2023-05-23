@@ -12,6 +12,8 @@
 
 .tool_bar{
   grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  z-index: 99;
 }
 
 .content{

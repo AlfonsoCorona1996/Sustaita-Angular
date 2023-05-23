@@ -9,6 +9,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 
 
+import { BrowserModule } from '@angular/platform-browser';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     ReactiveFormsModule,
     MatTabsModule,
+    // BrowserModule,
+    EditorModule
   ],
   exports: [
     PrincipalClientComponent,

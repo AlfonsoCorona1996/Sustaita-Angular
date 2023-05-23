@@ -101,8 +101,8 @@
   margin-bottom: 4px;
   padding: 4px 4px;
   min-width: 150px;
-  max-width: 200px;
-  width: 200px;
+  max-width: 190px;
+  width: 190px;
   /* height: 40px; */
   border-radius: 8px;
   font-size: 12px;
@@ -116,8 +116,8 @@
   margin-bottom: 4px;
   padding: 4px 8px;
   min-width: 150px;
-  max-width: 200px;
-  width: 200px;
+  max-width: 190px;
+  width: 190px;
   /* height: 40px; */
   border-radius: 8px;
   font-size: 12px;
@@ -703,13 +703,14 @@ option:hover {
     justify-content: space-between;
     flex-wrap: wrap;
     /* gap: 8px; */
+    gap: 4px;
     width: min(100%, 850px);
   /* max-width: 850px;
     box-sizing: border-box; */
   }
 
   .solicitarcotizacion-container-side-data{
-    width: 46vw;
+    width: 45vw;
   }
 }
 
@@ -733,3 +734,6 @@ option:hover {
   }
 
 }
+
+
+

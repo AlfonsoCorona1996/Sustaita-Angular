@@ -7,6 +7,7 @@ import { SidebarComponent } from '../shared/sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     InicioRoutingModule,
     SharedModule,
     ClienteModule,
-    FormsModule
+    FormsModule,
+    // BrowserModule
   ],
   exports: [
     InicioComponent

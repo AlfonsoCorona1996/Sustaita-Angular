@@ -18,9 +18,47 @@
       <div class="solicitarcotizacion-container-cont-title">
         <input type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
       </div>
-      <div class="solicitarcotizacion-container-cont-coments">
-        <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
-          class="solicitarcotizacion-container-cont-coments-textarea"></textarea>
+      <div class="solicitarcotizacion-container-cont-coments" style="z-index: 0;">
+        <!-- <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
+          class="solicitarcotizacion-container-cont-coments-textarea"></textarea> -->
+          <!-- <editor
+          [init]="{
+            height: 500,
+            menubar: false,
+            plugins: [
+               'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+              'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+              'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+            ],
+            toolbar:
+             'undo redo | casechange blocks | bold italic backcolor | \
+             alignleft aligncenter alignright alignjustify | \
+             bullist numlist checklist outdent indent | removeformat | a11ycheck code table help'
+          }"
+          initialValue="Welcome to TinyMCE Angular"
+        ></editor> -->
+        <editor
+        [init]="{
+          height: 390,
+          menubar: false,
+          language: 'es',
+          statusbar: false,
+          placeholder: 'Descripcion...',
+          content_style: 'body{font-size: 14px; font-weight: 500}',
+          plugins: [
+             'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+            'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+            'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+          ],
+          toolbar:
+           'undo redo | casechange blocks | bold italic forecolor| \
+           alignleft aligncenter alignright alignjustify | \
+           bullist numlist checklist outdent indent'
+        }"
+
+      ></editor>
+          <!-- initialValue="Descripcion" va dentro del editor -->
+
       </div>
     </div>
     <div class="solicitarcotizacion-container-side">
@@ -77,7 +115,7 @@
 
       <div class="solicitarcotizacion-container-side-data">
         <div class="solicitarcotizacion-container-side-data-title">
-          Refacciones y servicios
+          Refacciones
         </div>
         <div class="solicitarcotizacion-container-side-data-refacciones">
           <label class="header-button" style="cursor: pointer;">
