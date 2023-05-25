@@ -152,47 +152,53 @@
             {{selectedFiles.length}} archivo(s) seleccionado(s)
           </div>
           <div style="margin: 0px 4px;">
-          <table style="border-collapse: separate;
-          border-spacing: 0px 4px;">
+            <table style="border-collapse: separate;
+          border-spacing: 0px 4px; width: 100%;">
 
 
-            <tbody class="solicitarcotizacion-container-side-data-upladFiles-list-items">
+              <tbody class="solicitarcotizacion-container-side-data-upladFiles-list-items">
 
-              <tr class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
-                *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
+                <tr class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+                  *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
 
 
-                  <td *ngIf="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'">
-                    <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-                    src='../../../../../assets/image-solid.svg' style="margin: 4px;">
+                  <td
+                    *ngIf="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'">
+                    <img
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                      src='../../../../../assets/image-solid.svg' style="margin: 4px; filter: none;">
                   </td>
 
 
-                <td class="solicitarcotizacion-container-side-data-upladFiles-list-items-item-text">{{file.name}}</td>
+                  <td class="solicitarcotizacion-container-side-data-upladFiles-list-items-item-text"
+                    [title]="file.name">
+                    <div style="margin: auto; max-width: 144px;">{{file.name}}</div>
+                  </td>
 
-                <td>
-                  <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-                  src='../../../../../assets/xmark-solid.svg' style="margin: 4px;">
-                </td>
+                  <td>
+                    <img
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                      src='../../../../../assets/xmark-solid.svg' style="margin: 4px; filter: none; height: 9px">
+                  </td>
 
-              </tr>
+                </tr>
 
-              <!-- <div class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+                <!-- <div class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
             *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
             {{file.type}} {{file.name}} close
             </div> -->
 
-            </tbody>
-          </table>
-        </div>
-        <!-- <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
           {{selectedFiles.length}} archivo(s) seleccionado(s)
         </div> -->
-      </div>
+        </div>
 
+      </div>
     </div>
   </div>
-
 
   <div class="solicitarcotizacion-content-refacciones-back" id="details">
     <div class="solicitarcotizacion-content-refacciones-card">
@@ -200,8 +206,8 @@
 
       <div class="solicitarcotizacion-content-refacciones-card-close">
 
-        <img class="solicitarcotizacion-content-refacciones-card-close-icon" src='../../../../../assets/xmark-solid.svg'
-          (click)="close_refaccion_card()">
+        <img class="solicitarcotizacion-content-refacciones-card-close-icon"
+          src='../../../../../assets/xmark-solid.svg' (click)="close_refaccion_card()">
       </div>
 
       <div class="solicitarcotizacion-content-refacciones-card-title refacciones-add">
@@ -232,11 +238,11 @@
 
           <div class="solicitarcotizacion-content-refacciones-card-content-list">
             <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-div">
-            <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
-              src='../../../../../assets/magnifying-glass-solid.svg'>
-            <input type="text" placeholder="Buscar refacciones..."
-              class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
-          </div> -->
+          <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
+            src='../../../../../assets/magnifying-glass-solid.svg'>
+          <input type="text" placeholder="Buscar refacciones..."
+            class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
+        </div> -->
 
             <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
               Refacciones para equipos seleccionados
@@ -257,7 +263,8 @@
 
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
@@ -308,19 +315,19 @@
               </div>
             </div>
             <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
-            Otras refacciones
-          </div> -->
+          Otras refacciones
+        </div> -->
             <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones">
 
             </div>
           </div>
           <div class="solicitarcotizacion-content-refacciones-card-content-list">
             <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-div">
-            <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
-              src='../../../../../assets/magnifying-glass-solid.svg'>
-            <input type="text" placeholder="Buscar refacciones..."
-              class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
-          </div> -->
+          <img class="solicitarcotizacion-content-refacciones-card-content-list-searchbar-icon"
+            src='../../../../../assets/magnifying-glass-solid.svg'>
+          <input type="text" placeholder="Buscar refacciones..."
+            class="solicitarcotizacion-content-refacciones-card-content-list-searchbar">
+        </div> -->
             <div class="solicitarcotizacion-content-refacciones-card-content-list-title">
               Refacciones seleccionadas
             </div>
@@ -333,7 +340,8 @@
 
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
@@ -352,9 +360,9 @@
                     </div>
                     <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-place">
 
-                        {{refaccion.sitio.nombre}}
+                      {{refaccion.sitio.nombre}}
 
-                    </div> -->
+                  </div> -->
                   </div>
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right">
@@ -376,11 +384,11 @@
 
 
                     <!-- <div
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-aceptar">
-                      <img
-                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-                        src='../../../../../assets/check-solid.svg'>
-                    </div> -->
+                    class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-aceptar">
+                    <img
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                      src='../../../../../assets/check-solid.svg'>
+                  </div> -->
                   </div>
                 </div>
 
@@ -412,7 +420,8 @@
                   </div>
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div
+                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
@@ -430,9 +439,9 @@
                     </div>
                     <!-- <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part-place">
 
-                      {{refaccion.sitio.nombre}}
+                    {{refaccion.sitio.nombre}}
 
-                  </div> -->
+                </div> -->
                   </div>
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right ">
@@ -482,5 +491,3 @@
 
     </div>
   </div>
-
-</div>
