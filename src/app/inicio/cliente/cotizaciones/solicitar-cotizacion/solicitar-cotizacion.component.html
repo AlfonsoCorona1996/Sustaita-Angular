@@ -13,15 +13,18 @@
     </div>
   </div>
 
-  <div class="solicitarcotizacion-container">
-    <div class="solicitarcotizacion-container-cont">
-      <div class="solicitarcotizacion-container-cont-title">
-        <input type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
-      </div>
-      <div class="solicitarcotizacion-container-cont-coments" style="z-index: 0;">
-        <!-- <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
+  <div class="solicitarcotizacion-general-overflow">
+
+    <div class="solicitarcotizacion-container">
+
+      <div class="solicitarcotizacion-container-cont">
+        <div class="solicitarcotizacion-container-cont-title">
+          <input type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
+        </div>
+        <div class="solicitarcotizacion-container-cont-coments" style="z-index: 0;">
+          <!-- <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
           class="solicitarcotizacion-container-cont-coments-textarea"></textarea> -->
-        <!-- <editor
+          <!-- <editor
           [init]="{
             height: 500,
             menubar: false,
@@ -37,7 +40,7 @@
           }"
           initialValue="Welcome to TinyMCE Angular"
         ></editor> -->
-        <editor [init]="{
+          <editor [init]="{
           height: 390,
           menubar: false,
           language: 'es',
@@ -54,151 +57,181 @@
            alignleft aligncenter alignright alignjustify | \
            bullist numlist checklist outdent indent'
         }"></editor>
-        <!-- initialValue="Descripcion" va dentro del editor -->
+          <!-- initialValue="Descripcion" va dentro del editor -->
 
-      </div>
-    </div>
-    <div class="solicitarcotizacion-container-side">
-      <div class="solicitarcotizacion-container-side-data">
-        <div class="solicitarcotizacion-container-side-data-title">
-          Sitio
         </div>
-        <div class="solicitarcotizacion-container-side-data-combo">
-          <select [(ngModel)]="equipo_text" #opcion
-            (change)="select(opcion.value, opcion.options[opcion.options.selectedIndex].text)" id="sitio_combo"
-            class="solicitarcotizacion-container-side-data-combo-select">
-            <option *ngIf="sitios !== undefined && sitios.length > 1" hidden selected value="selecciona">Selecciona
-            </option>
-            <option *ngFor="let sitio of sitios" [value]="sitio.id"> {{sitio.nombre}}</option>
-          </select>
-          <div class="solicitarcotizacion-container-side-data-add">
-            Añadir nuevo sitio
+      </div>
+      <div class="solicitarcotizacion-container-side">
+        <div class="solicitarcotizacion-container-side-data">
+          <div class="solicitarcotizacion-container-side-data-title">
+            Sitio
+          </div>
+          <div class="solicitarcotizacion-container-side-data-combo">
+            <select [(ngModel)]="equipo_text" #opcion
+              (change)="select(opcion.value, opcion.options[opcion.options.selectedIndex].text)" id="sitio_combo"
+              class="solicitarcotizacion-container-side-data-combo-select">
+              <option *ngIf="sitios !== undefined && sitios.length > 1" hidden selected value="selecciona">Selecciona
+              </option>
+              <option *ngFor="let sitio of sitios" [value]="sitio.id"> {{sitio.nombre}}</option>
+            </select>
+            <div class="solicitarcotizacion-container-side-data-add">
+              Añadir nuevo sitio
+            </div>
+          </div>
+
+        </div>
+
+        <div class="solicitarcotizacion-container-side-data">
+          <div class="solicitarcotizacion-container-side-data-title">
+            Equipos
+          </div>
+          <div class="solicitarcotizacion-container-side-data-combo">
+            <!-- ! MOBILE -->
+            <select [disabled]="equipo_text=='selecciona'" *ngIf="mobile" id="equipos-mobile"
+              class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple"
+              [(ngModel)]="equipos_selected">
+              <!-- class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple" [formControl]="toppings"> -->
+              <!-- <option  hidden selected>Selecciona</option> -->
+              <option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.modelo}}</option>
+            </select>
+            <!-- ! DESKTOP -->
+            <!-- <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" formControlName="parts" -->
+            <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" [(ngModel)]="equipos_selected"
+              (change)="equipos_select()" id="equipos-PC" multiple
+              class="solicitarcotizacion-container-side-data-combo-select-math" [style.background-color]="color_Equipo">
+              <mat-select-trigger>
+                <!-- {{toppings.value?.[0] || ''}} -->
+                <span class="example-additional-selection">
+                  {{(equipos_selected.length || 0)}} {{equipos_selected.length === 1 ? 'equipo' : 'equipos'}}
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let equipo of equipos" [value]="equipo">
+                {{equipo.modelo}}</mat-option>
+            </mat-select>
+            <div class="solicitarcotizacion-container-side-data-add">
+              Añadir nuevo equipo
+            </div>
           </div>
         </div>
 
-      </div>
+        <div class="solicitarcotizacion-container-side-data">
+          <div class="solicitarcotizacion-container-side-data-title">
+            Refacciones
+          </div>
+          <div class="solicitarcotizacion-container-side-data-refacciones">
+            <label class="solicitarcotizacion-container-side-data-refacciones-button" style="cursor: pointer;"
+              (click)="equipos_select()">
+              <input type="checkbox" class="menu-check" style="display: none;" id="add-refaccion"
+                [disabled]="refacciones_part_list.length == 0">
 
-      <div class="solicitarcotizacion-container-side-data">
-        <div class="solicitarcotizacion-container-side-data-title">
-          Equipos
-        </div>
-        <div class="solicitarcotizacion-container-side-data-combo">
-          <!-- ! MOBILE -->
-          <select [disabled]="equipo_text=='selecciona'" *ngIf="mobile" id="equipos-mobile"
-            class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple"
-            [(ngModel)]="equipos_selected">
-            <!-- class="solicitarcotizacion-container-side-data-combo-select" multiple="multiple" [formControl]="toppings"> -->
-            <!-- <option  hidden selected>Selecciona</option> -->
-            <option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.modelo}}</option>
-          </select>
-          <!-- ! DESKTOP -->
-          <!-- <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" formControlName="parts" -->
-          <mat-select [disabled]="equipo_text=='selecciona'" *ngIf="!mobile" [(ngModel)]="equipos_selected"
-            (change)="equipos_select()" id="equipos-PC" multiple
-            class="solicitarcotizacion-container-side-data-combo-select-math" [style.background-color]="color_Equipo">
-            <mat-select-trigger>
-              <!-- {{toppings.value?.[0] || ''}} -->
-              <span class="example-additional-selection">
-                {{(equipos_selected.length || 0)}} {{equipos_selected.length === 1 ? 'equipo' : 'equipos'}}
-              </span>
-            </mat-select-trigger>
-            <mat-option *ngFor="let equipo of equipos" [value]="equipo">
-              {{equipo.modelo}}</mat-option>
-          </mat-select>
-          <div class="solicitarcotizacion-container-side-data-add">
-            Añadir nuevo equipo
+              <img
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                src='../../../../../assets/screwdriver-wrench-solid.svg' style="margin: 5px 10px 5px 0px;">
+              Seleccionar refacciones
+
+            </label>
+          </div>
+          <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="margin-bottom: 16px;">
+            <div class="solicitarcotizacion-container-side-data-upladFiles-list-head"
+              (click)="open_refacciones_selected()" style="cursor: pointer;">
+              {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="solicitarcotizacion-container-side-data">
-        <div class="solicitarcotizacion-container-side-data-title">
-          Refacciones
-        </div>
-        <div class="solicitarcotizacion-container-side-data-refacciones">
-          <label class="solicitarcotizacion-container-side-data-refacciones-button" style="cursor: pointer;"
-            (click)="equipos_select()">
-            <input type="checkbox" class="menu-check" style="display: none;" id="add-refaccion"
-              [disabled]="refacciones_part_list.length == 0">
-
-            <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-              src='../../../../../assets/screwdriver-wrench-solid.svg' style="margin: 5px 10px 5px 0px;">
-            Seleccionar refacciones
-
-          </label>
-        </div>
-        <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="margin-bottom: 16px;">
-          <div class="solicitarcotizacion-container-side-data-upladFiles-list-head"
-            (click)="open_refacciones_selected()" style="cursor: pointer;">
-            {{refacciones_select_list.length}} refaccion(es) seleccionada(s)
+        <div class="solicitarcotizacion-container-side-data">
+          <div class="solicitarcotizacion-container-side-data-title">
+            Archivos
           </div>
-        </div>
-      </div>
-
-      <div class="solicitarcotizacion-container-side-data">
-        <div class="solicitarcotizacion-container-side-data-title">
-          Archivos
-        </div>
-        <div class="solicitarcotizacion-container-side-data-combo">
-          <label class="solicitarcotizacion-container-side-data-upladFiles" style="cursor: pointer;">
-            <input type="file" id="file-input" (change)="fileChangeEvent($event)" multiple="multiple">
-            <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-              src='../../../../../assets/cloud-arrow-up-solid.svg' style="margin: 5px 10px 5px 0px;">
-            Elegir archivo(s)
-          </label>
-        </div>
-        <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="padding: 0px;">
-          <div class="solicitarcotizacion-container-side-data-upladFiles-list-head">
-            {{selectedFiles.length}} archivo(s) seleccionado(s)
+          <div class="solicitarcotizacion-container-side-data-combo">
+            <label class="solicitarcotizacion-container-side-data-upladFiles" style="cursor: pointer;">
+              <input type="file" id="file-input" (change)="fileChangeEvent($event)" multiple="multiple">
+              <img
+                class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                src='../../../../../assets/cloud-arrow-up-solid.svg' style="margin: 5px 10px 5px 0px;">
+              Elegir archivo(s)
+            </label>
           </div>
-          <div style="margin: 0px 4px;">
-            <table style="border-collapse: separate;
+          <div class="solicitarcotizacion-container-side-data-upladFiles-list" style="padding: 0px;">
+            <div class="solicitarcotizacion-container-side-data-upladFiles-list-head">
+              {{selectedFiles.length}} archivo(s) seleccionado(s)
+            </div>
+            <div style="margin: 0px 4px;">
+              <table style="border-collapse: separate;
           border-spacing: 0px 4px; width: 100%;">
 
 
-              <tbody class="solicitarcotizacion-container-side-data-upladFiles-list-items">
+                <tbody class="solicitarcotizacion-container-side-data-upladFiles-list-items">
 
-                <tr class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
-                  *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
+                  <tr class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+                    *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
+
+<!--
+                    <td
+                      *ngIf="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'">
+                      <img
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/image-solid.svg' style="margin: 4px; filter: none;">
+                    </td> -->
+                    <td [ngSwitch]="true">
+                      <img *ngSwitchCase="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'"
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/image-solid.svg' style="margin: 4px; filter: none;">
+                        <img *ngSwitchCase="file.type == 'application/pdf'"
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/file-pdf-solid.svg' style="margin: 4px; filter: none;">
+                        <img *ngSwitchDefault
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/file-solid.svg' style="margin: 4px; filter: none;">
+                    </td>
 
 
-                  <td
-                    *ngIf="file.type == 'image/png' || file.type == 'image/webp' || file.type == 'image/jpg' || file.type == 'image/gif' || file.type == 'image/jpeg'">
-                    <img
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-                      src='../../../../../assets/image-solid.svg' style="margin: 4px; filter: none;">
-                  </td>
+                    <td class="solicitarcotizacion-container-side-data-upladFiles-list-items-item-text"
+                      [title]="file.name">
+                      <div style="margin: auto; max-width: 144px;">{{file.name}}</div>
+                    </td>
 
+                    <td>
+                      <img
+                        class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+                        src='../../../../../assets/xmark-solid.svg' style="margin: 4px; filter: none; height: 9px">
+                    </td>
 
-                  <td class="solicitarcotizacion-container-side-data-upladFiles-list-items-item-text"
-                    [title]="file.name">
-                    <div style="margin: auto; max-width: 144px;">{{file.name}}</div>
-                  </td>
+                  </tr>
 
-                  <td>
-                    <img
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
-                      src='../../../../../assets/xmark-solid.svg' style="margin: 4px; filter: none; height: 9px">
-                  </td>
-
-                </tr>
-
-                <!-- <div class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
+                  <!-- <div class="solicitarcotizacion-container-side-data-upladFiles-list-items-item"
             *ngFor="let file of selectedFiles ; let i = index; trackBy: trackItem">
             {{file.type}} {{file.name}} close
             </div> -->
 
-              </tbody>
-            </table>
-          </div>
-          <!-- <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
+                </tbody>
+              </table>
+            </div>
+            <!-- <div class="solicitarcotizacion-container-side-data-add" (click)="open_refacciones_selected()">
           {{selectedFiles.length}} archivo(s) seleccionado(s)
         </div> -->
-        </div>
+          </div>
 
+        </div>
       </div>
+
+    </div>
+
+
+    <div class="solicitarcotizacion-foot">
+      <div class="solicitarcotizacion-foot-center-div">
+      <div class="solicitarcotizacion-foot-button">
+        <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
+          src='../../../../../assets/check-solid.svg' style="margin: 5px 10px 5px 0px;">
+        Solicitar
+      </div>
+      <!-- <div class="solicitarcotizacion-header-subtitle">
+        Selecciona para enviar la solicitud de cotización
+      </div> -->
+    </div>
     </div>
   </div>
+
 
   <div class="solicitarcotizacion-content-refacciones-back" id="details">
     <div class="solicitarcotizacion-content-refacciones-card">
@@ -206,8 +239,8 @@
 
       <div class="solicitarcotizacion-content-refacciones-card-close">
 
-        <img class="solicitarcotizacion-content-refacciones-card-close-icon"
-          src='../../../../../assets/xmark-solid.svg' (click)="close_refaccion_card()">
+        <img class="solicitarcotizacion-content-refacciones-card-close-icon" src='../../../../../assets/xmark-solid.svg'
+          (click)="close_refaccion_card()">
       </div>
 
       <div class="solicitarcotizacion-content-refacciones-card-title refacciones-add">
@@ -263,8 +296,7 @@
 
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
@@ -340,8 +372,7 @@
 
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
@@ -420,8 +451,7 @@
                   </div>
                   <div
                     class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-left">
-                    <div
-                      class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
+                    <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-title">
                       {{refaccion.nombre}}
                     </div>
                     <div class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-part">
