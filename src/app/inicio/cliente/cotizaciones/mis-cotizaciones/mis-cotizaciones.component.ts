@@ -111,7 +111,6 @@ export class MisCotizacionesComponent implements OnInit {
     this._cotizaciones_clienteService.listar_cotizacion_cliente_largas(folio).subscribe({
       next: (v) => {
         this.cotizacion = v[0];
-        console.log(this.cotizacion);
         this.details_();
         this.time_between();
       },
@@ -130,7 +129,13 @@ export class MisCotizacionesComponent implements OnInit {
         if (Math.floor(((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24))) == 1) {
           this.diferencia = (" - hace " + Math.floor(((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24))) + " día")
         } else {
-          this.diferencia = (" - hoy")
+          if(Math.floor((fechaFin - fechaInicio)/60000)> 59){
+            const horas = Math.floor((fechaFin - fechaInicio)/60000/60)
+            const minutos = Math.floor((fechaFin - fechaInicio)/60000) - (horas * 60)
+            this.diferencia = (" - hace " + horas + " horas y " +  minutos + " minutos ")
+          }else{
+            this.diferencia = (" - hace " + Math.floor((fechaFin - fechaInicio)/60000) + " minutos ")
+          }
         }
       } else {
         this.diferencia = (" - hace " + Math.floor(((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24))) + " días")
