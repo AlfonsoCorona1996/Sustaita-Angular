@@ -19,7 +19,7 @@
 
       <div class="solicitarcotizacion-container-cont">
         <div class="solicitarcotizacion-container-cont-title">
-          <input type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
+          <input [(ngModel)]="titulo" type="text" placeholder="Titulo" class="solicitarcotizacion-container-cont-title-input">
         </div>
         <div class="solicitarcotizacion-container-cont-coments" style="z-index: 0;">
           <!-- <textarea placeholder="Comentarios" name="" id="" cols="30" rows="10"
@@ -56,7 +56,7 @@
            'undo redo | casechange blocks | bold italic forecolor| \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist checklist outdent indent'
-        }"></editor>
+        }"  [(ngModel)]="descripcion"></editor>
           <!-- initialValue="Descripcion" va dentro del editor -->
 
         </div>
@@ -191,7 +191,7 @@
                       <div style="margin: auto; max-width: 144px;">{{file.name}}</div>
                     </td>
 
-                    <td>
+                    <td (click)="remove_file(i)">
                       <img
                         class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
                         src='../../../../../assets/xmark-solid.svg' style="margin: 4px; filter: none; height: 9px">
@@ -220,7 +220,7 @@
 
     <div class="solicitarcotizacion-foot">
       <div class="solicitarcotizacion-foot-center-div">
-      <div class="solicitarcotizacion-foot-button">
+      <div class="solicitarcotizacion-foot-button" (click)="request()">
         <img class="solicitarcotizacion-content-refacciones-card-content-list-refacciones-refaccion-cont-right-icon"
           src='../../../../../assets/check-solid.svg' style="margin: 5px 10px 5px 0px;">
         Solicitar

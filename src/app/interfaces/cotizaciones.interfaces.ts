@@ -63,6 +63,26 @@ export interface cot {
   __v: number;
 }
 
+export interface resp_reg_cotizacion{
+  data: cotizacion_registrar
+}
+
+export interface cotizacion_registrar{
+  folio: string;
+  des_cliente: string;
+  des_empresa: string;
+  empresa: string;
+  sitio: string;
+  id_sitio: string;
+  equipos: Equipo[];
+  atencion: string;
+  fecha_sol: Date;
+  status: string;
+  refacciones: Refaccion_cot[];
+  archivos: File[];
+
+}
+
 export interface Equipo {
   id: string;
   marca: string;

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CotizacionesClienteService } from '../../../../services/cotizaciones-cliente.service';
-import { Equipo, sitio_combo, Equipo_res, Refacciones, Refaccion, Refaccion_cot, cot } from '../../../../interfaces/cotizaciones.interfaces';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatTabsModule } from '@angular/material/tabs';
+import { Equipo, sitio_combo, Equipo_res, Refacciones, Refaccion, Refaccion_cot, cot, cotizacion_registrar } from '../../../../interfaces/cotizaciones.interfaces';
+// import { FormControl, FormGroup } from '@angular/forms';
+// import { MatTabsModule } from '@angular/material/tabs';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
+import { data } from 'jquery';
 
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -19,6 +22,12 @@ declare var iziToast: any;
 export class SolicitarCotizacionComponent implements OnInit {
 
   public empresa: string = '';
+  public empresa_id: string = '';
+  public folio: string = '';
+  // public arr_files_name: string[] = ["4O7SQ7ofmiJEGekA6r4Xvf4K.png"];
+  public titulo: string = '';
+  public descripcion: string = '';
+  public atencion: string = '';
   public sitios: Array<sitio_combo> | undefined = [];
   public equipos: Array<Equipo> | undefined = [];
   public sitio_selected: sitio_combo = { nombre: "TBD", id: "TBD" };
@@ -32,6 +41,20 @@ export class SolicitarCotizacionComponent implements OnInit {
   public refacciones_info_list: Array<Refaccion> = []
   public refacciones_select_list: Array<Refaccion_cot> = []
   public selectedFiles: Array<File> = []
+  public registrar: cotizacion_registrar = {
+    folio: '',
+    des_cliente: '',
+    des_empresa: '',
+    empresa: '',
+    sitio: '',
+    id_sitio: '',
+    equipos: [],
+    atencion: '',
+    fecha_sol: new Date(),
+    status: '',
+    refacciones: [],
+    archivos: []
+  };
 
 
 
@@ -41,7 +64,9 @@ export class SolicitarCotizacionComponent implements OnInit {
 
 
   constructor(
-    private _cotizaciones_clienteService: CotizacionesClienteService
+    private _cotizaciones_clienteService: CotizacionesClienteService,
+    private _login_service: LoginService,
+    private _router: Router
   ) { }
 
   ngOnInit(): void {
@@ -56,6 +81,9 @@ export class SolicitarCotizacionComponent implements OnInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(token);
     this.empresa = decodedToken.empresa;
+    this.empresa_id = decodedToken.id_empresa;
+    this.atencion = decodedToken.sub;
+
 
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
       // true for mobile device
@@ -150,14 +178,14 @@ export class SolicitarCotizacionComponent implements OnInit {
     }
   }
 
-
+  // ! Funcion para abrir poup de refacciones, pero en la tab de seleccionadas
   open_refacciones_selected() {
     if (this.refacciones_info_list.length > 0) {
       const checkbox = document.getElementById("add-refaccion") as HTMLInputElement | null;
       const checkbox2 = document.getElementById("next-refaccionn") as HTMLInputElement | null;
       if (checkbox && checkbox2) {
         checkbox.checked = true
-        checkbox2.checked= true
+        checkbox2.checked = true
       }
     }
     else {
@@ -266,25 +294,30 @@ export class SolicitarCotizacionComponent implements OnInit {
     this.refacciones_info_list.push(newRefaccion);
   }
 
+  remove_file(index: number) {
+    this.selectedFiles.splice(index, 1)
 
-  fileChangeEvent(evento: Event){
+  }
+
+  // ! Funcion para validar si el archivo ya existe, es menor a 4mb y añadirlo al [] de archivos
+  // ? Se envia la funcion event para tomar de ahi el archivo
+  fileChangeEvent(evento: Event) {
     var file;
     const isThereFile = evento.target as HTMLInputElement;
-    if (isThereFile && isThereFile.files && isThereFile.files[0]){
-      for(let i = 0; i < isThereFile.files.length; i++){
+    if (isThereFile && isThereFile.files && isThereFile.files[0]) {
+      for (let i = 0; i < isThereFile.files.length; i++) {
         // file = <File>isThereFile.files[0];
         const file = <File>isThereFile.files[i];
 
-        if(file.size <= 4000000){
-          var exist:boolean = false
-          for(let f of this.selectedFiles){
-            console.log(file)
-            if(f.name == file.name && f.size == file.size){
+        if (file.size <= 4000000) {
+          var exist: boolean = false
+          for (let f of this.selectedFiles) {
+            if (f.name == file.name && f.size == file.size) {
               exist = true
               break
             }
           }
-          if (exist){
+          if (exist) {
             console.log("ya esta")
             iziToast.show({
               title: 'Error:',
@@ -295,13 +328,13 @@ export class SolicitarCotizacionComponent implements OnInit {
               progressBarColor: '#0087d4',
               class: 'text-danger',
               position: 'topRight',
-              message: 'El archivo '+ file.name +' ya fue seleccionado',
+              message: 'El archivo ' + file.name + ' ya fue seleccionado',
             });
-          }else{
+          } else {
             this.selectedFiles.push(file)
           }
 
-        }else{
+        } else {
           iziToast.show({
             title: 'Error:',
             titleColor: '#FF0000',
@@ -311,16 +344,16 @@ export class SolicitarCotizacionComponent implements OnInit {
             progressBarColor: '#0087d4',
             class: 'text-danger',
             position: 'topRight',
-            message: file.name +', no pudo ser agregado por que es mayor a 4MB',
+            message: file.name + ', no pudo ser agregado por que es mayor a 4MB',
           });
-        //  const inputFile = document.getElementById("file-input") as HTMLInputElement | null;;
-        //  if (inputFile){
-        //   inputFile.value = ''
-        //  }
+          //  const inputFile = document.getElementById("file-input") as HTMLInputElement | null;;
+          //  if (inputFile){
+          //   inputFile.value = ''
+          //  }
         }
       }
 
-    }else{
+    } else {
       iziToast.show({
         title: 'Error:',
         titleColor: '#FF0000',
@@ -334,6 +367,78 @@ export class SolicitarCotizacionComponent implements OnInit {
       });
     }
   }
+
+  request() {
+
+    if (this.titulo != '' && this.descripcion != '' && this.equipos_selected.length > 0) {
+      const token = this._login_service.getToken()
+      this.registrar = {
+        folio: '',
+        des_cliente: this.titulo,
+        des_empresa: this.descripcion,
+        empresa: this.empresa_id,
+        sitio: this.sitio_selected.nombre,
+        id_sitio: this.sitio_selected.id,
+        equipos: this.equipos_selected,
+        atencion: this.atencion,
+        fecha_sol: new Date(),
+        status: 'Solicitada',
+        refacciones: this.refacciones_select_list,
+        archivos: []
+      }
+
+      this._cotizaciones_clienteService.registro_solicitud_cotizacion_JSON(this.registrar).subscribe({
+        next: (v) => {
+          if (v != undefined) {
+            this.folio = v.folio
+            if (this.selectedFiles.length > 0) {
+              this._cotizaciones_clienteService.registro_solicitud_cotizacion_FILES(this.selectedFiles, token).subscribe({
+                next: (v) => {
+                  this._cotizaciones_clienteService.update_files_names(v.data, this.folio).subscribe({
+                    next: (v) => {
+                      this._router.navigate(['/cliente/inicio/mis-cotizaciones']);
+                    },
+                    error: (e) => console.error(e)
+                  });
+                },
+                error: (e) => console.error(e)
+              });
+            }
+          }
+        },
+        error: (e) => console.error(e)
+      })
+
+
+
+
+      // this._cotizaciones_clienteService.update_files_names(this.arr_files_name).subscribe({
+      //   next: (v) => {
+      //     console.log(v)
+      //   },
+      //   error: (e) => console.error(e)
+      // });
+
+
+      // this._router.navigate(['/cliente/inicio/mis-cotizaciones']);
+
+    } else {
+      iziToast.show({
+        title: 'Error:',
+        titleColor: '#FF0000',
+        timeout: 3000,
+        messageColor: '#051b34',
+        color: '#FFFFFF',
+        progressBarColor: '#0087d4',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'Es necesario llenar los campos faltantes para continuar',
+      });
+    }
+  }
+
+
+
 
   async focus(id: string) {
     await this.delay(300);

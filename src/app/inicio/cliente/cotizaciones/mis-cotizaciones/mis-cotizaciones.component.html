@@ -41,7 +41,7 @@
 
         <div class="miscotiaciones-content-kanbanTable-cards">
 
-          <div class="miscotiaciones-content-kanbanTable-card"
+          <div class="miscotiaciones-content-kanbanTable-card animate__animated animate__flipInX animate__faster"
             *ngFor="let cot of cotizaciones | cotizacionesPipe:'Solicitada':filter_option:filter_list"
             (click)="Details(cot.folio)">
             <label class="header-button" style="cursor: pointer;">
@@ -84,7 +84,7 @@
         </div>
 
         <div class="miscotiaciones-content-kanbanTable-cards">
-          <div class="miscotiaciones-content-kanbanTable-card"
+          <div class="miscotiaciones-content-kanbanTable-card animate__animated animate__flipInX animate__faster"
             *ngFor="let cot of cotizaciones | cotizacionesPipe:'Proceso':filter_option:filter_list"
             (click)="Details(cot.folio)">
             <label class="header-button" style="cursor: pointer;">
@@ -124,7 +124,7 @@
           Entregadas
         </div>
         <div class="miscotiaciones-content-kanbanTable-cards">
-          <div class="miscotiaciones-content-kanbanTable-card"
+          <div class="miscotiaciones-content-kanbanTable-card animate__animated animate__flipInX animate__faster"
             *ngFor="let cot of cotizaciones | cotizacionesPipe:'Entregada':filter_option:filter_list"
             (click)="Details(cot.folio)">
             <label class="header-button" style="cursor: pointer;">
@@ -166,7 +166,7 @@
         </div>
 
         <div class="miscotiaciones-content-kanbanTable-cards">
-          <div class="miscotiaciones-content-kanbanTable-card"
+          <div class="miscotiaciones-content-kanbanTable-card animate__animated animate__flipInX animate__faster"
             *ngFor="let cot of cotizaciones | cotizacionesPipe:'Caduco':filter_option:filter_list"
             (click)="Details(cot.folio)">
             <label class="header-button" style="cursor: pointer;">
