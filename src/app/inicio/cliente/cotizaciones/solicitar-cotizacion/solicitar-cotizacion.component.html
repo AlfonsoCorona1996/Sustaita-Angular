@@ -40,7 +40,7 @@
           }"
           initialValue="Welcome to TinyMCE Angular"
         ></editor> -->
-          <editor [init]="{
+          <editor id="texteditor" [init]="{
           height: 390,
           menubar: false,
           language: 'es',
@@ -56,7 +56,8 @@
            'undo redo | casechange blocks | bold italic forecolor| \
            alignleft aligncenter alignright alignjustify | \
            bullist numlist checklist outdent indent'
-        }"  [(ngModel)]="descripcion"></editor>
+        }"></editor>
+        <!-- }"  [(ngModel)]="descripcion"></editor> -->
           <!-- initialValue="Descripcion" va dentro del editor -->
 
         </div>

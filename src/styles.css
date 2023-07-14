@@ -24,7 +24,7 @@ input:-webkit-autofill::first-line {
 }
 
 li{
-  list-style:none;
+  /* list-style:none; */
 }
 
 a{
@@ -60,4 +60,8 @@ input::-webkit-inner-spin-button {
 
 input[type="file"] {
   display: none;
+}
+
+* {
+  scroll-behavior: smooth;
 }

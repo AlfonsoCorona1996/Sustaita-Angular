@@ -136,6 +136,7 @@ export class CotizacionesClienteService {
         }
       }
 
+
       return {
         _id: cotizacion._id,
         folio: cotizacion.folio,
@@ -228,6 +229,7 @@ export class CotizacionesClienteService {
 
 
   registro_solicitud_cotizacion_JSON(data: cotizacion_registrar): Observable<cotizacion_registrar | undefined> {
+    console.log(data)
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post<resp_reg_cotizacion>(this.url + '/registro_cotizacion', data, { headers: headers })
       .pipe(
@@ -277,12 +279,10 @@ export class CotizacionesClienteService {
 
   update_files_names(arr_names_files: string[], folio:string): Observable<any> {
     const names = []
-    console.log(arr_names_files)
     const data = {
       names: arr_names_files,
       folio: folio
     }
-    console.log(data)
     let headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post<resp_reg_cotizacion>(this.url + '/update_files_registro', data, { headers: headers })
   }

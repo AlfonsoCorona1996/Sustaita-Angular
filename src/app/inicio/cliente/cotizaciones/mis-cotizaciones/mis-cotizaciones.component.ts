@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, HostListener } from '@angular/core';
 import { cot_list } from 'src/app/interfaces/cotizaciones.interfaces';
 import { CotizacionesClienteService } from 'src/app/services/cotizaciones-cliente.service';
 import { CotizacionesPipePipe } from '../../cotizaciones-pipe.pipe';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { cot_larga, Equipo } from '../../../../interfaces/cotizaciones.interfaces';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 interface options {
   value: string;
@@ -14,11 +15,15 @@ interface options {
   selector: 'app-mis-cotizaciones',
   templateUrl: './mis-cotizaciones.component.html',
   styleUrls: ['./mis-cotizaciones.component.css'],
-  providers: [CotizacionesPipePipe]
+  providers: [CotizacionesPipePipe],
+  encapsulation: ViewEncapsulation.None
 })
 export class MisCotizacionesComponent implements OnInit {
 
+  public mobile: Boolean = false;
+  public windowWith: Boolean = true;
   public cotizaciones: Array<cot_list> | undefined = [];
+  public descripcion_html: SafeHtml = ''
   public caducada: number = 0;
   public solicitada: number = 0;
   public proceso: number = 0;
@@ -53,7 +58,8 @@ export class MisCotizacionesComponent implements OnInit {
 
   constructor(
     private _cotizaciones_clienteService: CotizacionesClienteService,
-    private CotizacionesPipe: CotizacionesPipePipe
+    private CotizacionesPipe: CotizacionesPipePipe,
+    private sanitazer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -86,9 +92,31 @@ export class MisCotizacionesComponent implements OnInit {
     const decodedToken = helper.decodeToken(token);
     this.empresa = decodedToken.empresa;
 
+    // const parser = new DOMParser();
+    // const document = parser.parseFromString(this.cotizacion.des_larga, 'text/html')
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // true for mobile device
+      this.mobile = true
+    } else {
+      // false for not mobile device
+      this.mobile = false
+    }
 
+    if (window.innerWidth < 601) {
+      this.windowWith = true
+    } else {
+      this.windowWith = false
+    }
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    if (event.target.innerWidth < 601) {
+      this.windowWith = true
+    } else {
+      this.windowWith = false
+    }
+  }
 
   Search(search: string) {
     // this.page = 0;
@@ -111,6 +139,8 @@ export class MisCotizacionesComponent implements OnInit {
     this._cotizaciones_clienteService.listar_cotizacion_cliente_largas(folio).subscribe({
       next: (v) => {
         this.cotizacion = v[0];
+        console.log(this.cotizacion)
+        this.descripcion_html = this.sanitazer.bypassSecurityTrustHtml(this.cotizacion.des_larga);
         this.details_();
         this.time_between();
       },
@@ -129,12 +159,12 @@ export class MisCotizacionesComponent implements OnInit {
         if (Math.floor(((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24))) == 1) {
           this.diferencia = (" - hace " + Math.floor(((fechaFin - fechaInicio) / (1000 * 60 * 60 * 24))) + " día")
         } else {
-          if(Math.floor((fechaFin - fechaInicio)/60000)> 59){
-            const horas = Math.floor((fechaFin - fechaInicio)/60000/60)
-            const minutos = Math.floor((fechaFin - fechaInicio)/60000) - (horas * 60)
-            this.diferencia = (" - hace " + horas + " horas y " +  minutos + " minutos ")
-          }else{
-            this.diferencia = (" - hace " + Math.floor((fechaFin - fechaInicio)/60000) + " minutos ")
+          if (Math.floor((fechaFin - fechaInicio) / 60000) > 59) {
+            const horas = Math.floor((fechaFin - fechaInicio) / 60000 / 60)
+            const minutos = Math.floor((fechaFin - fechaInicio) / 60000) - (horas * 60)
+            this.diferencia = (" - hace " + horas + " horas y " + minutos + " minutos ")
+          } else {
+            this.diferencia = (" - hace " + Math.floor((fechaFin - fechaInicio) / 60000) + " minutos ")
           }
         }
       } else {
@@ -200,6 +230,27 @@ export class MisCotizacionesComponent implements OnInit {
           if (box != null) { box.checked = false; }
         }
       }
+    }
+  }
+
+  scrollTabs(side: string) {
+    const scrollableArea = document.getElementById("Tab-center");
+    if (scrollableArea != null) {
+      if (side == 'left') {
+        scrollableArea.scrollBy(-70, 0);
+      } else {
+        scrollableArea.scrollBy(70, 0);
+      }
+    }
+  }
+
+  scroll_Tap(n:number){
+    const scrollableArea = document.getElementById("Tab-center");
+    if (scrollableArea != null) {
+      scrollableArea.scrollTo(((170*n)-((scrollableArea.offsetWidth-170)/2)), 0)
+      // scrollableArea.scrollTo((scrollableArea.scrollWidth/100 * n), 0)
+      // scrollableArea.scrollBy(-100, 0);
+      // scrollableArea.scrollBy(n, 0);
     }
   }
 

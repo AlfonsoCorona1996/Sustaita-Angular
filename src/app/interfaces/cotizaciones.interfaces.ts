@@ -51,7 +51,7 @@ export interface cot {
   des_empresa: string;
   empresa: string;
   sitio: string;
-  equipos: Equipo[];
+  equipos: Equipo[][];
   atencion: string;
   remitente: string;
   fecha_sol: Date;
@@ -114,7 +114,7 @@ export interface cot_larga {
   des_larga: string;
   empresa: string;
   sitio: string;
-  equipos: Equipo[];
+  equipos: Equipo[][];
   atencion: string;
   remitente: string;
   fecha_sol: Date;

@@ -9,7 +9,7 @@
 
 
         <div  *ngFor="let categoria of permisos.categorias" class="header-menu-ngfor">
-          <li class="header-list" *ngIf="categoria.show" (click)="uncheck_submenu(categoria.viewValue)">
+          <li class="header-list" *ngIf="categoria.show" (click)="uncheck_submenu(categoria.viewValue)" style="list-style:none;">
             <label class="header-button">
               <input type="checkbox" class="menu-check" [attr.id]="categoria.viewValue">
               {{categoria.viewValue}}
@@ -18,7 +18,7 @@
             <div class="header-submenu-container">
               <ul class="header-submenu">
 
-                <li *ngFor="let sub of categoria.sub">
+                <li *ngFor="let sub of categoria.sub" style="list-style:none;">
                   <a class="header-submenu-item" [routerLink]="sub.route" *ngIf="sub.show" (click)="uncheck()">
                     <div class="header-submenu-items-center">
                       <img class="header-submenu-icon" src='../../../assets/{{sub.icon}}'>
@@ -124,7 +124,7 @@
 
       <div class="header-user-submenu-container">
         <ul class="header-user-submenu">
-          <li>
+          <li style="list-style:none;">
             <a class="header-submenu-item" href="">
               <div class="header-submenu-items-center">
                 <img class="header-submenu-icon" src="../../../assets/gear-solid.svg"
@@ -139,7 +139,7 @@
           </li>
           <hr style="height: 0.5px; border: 0; border-top: #cfcfcf .2px solid; margin-bottom: 8px;">
 
-          <li (click)="logout()">
+          <li (click)="logout()" style="list-style:none;">
             <a class="header-submenu-item" href="">
               <div class="header-submenu-items-center">
                 <img class="header-submenu-icon" src="../../../assets/right-from-bracket-solid.svg"

@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CotizacionesClienteService } from '../../../../services/cotizaciones-cliente.service';
-import { Equipo, sitio_combo, Equipo_res, Refacciones, Refaccion, Refaccion_cot, cot, cotizacion_registrar } from '../../../../interfaces/cotizaciones.interfaces';
-// import { FormControl, FormGroup } from '@angular/forms';
-// import { MatTabsModule } from '@angular/material/tabs';
+import { Equipo, sitio_combo, Refaccion, Refaccion_cot, cot, cotizacion_registrar } from '../../../../interfaces/cotizaciones.interfaces';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-import { data } from 'jquery';
-
+declare const tinymce: any;
 interface HTMLInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
 }
@@ -173,7 +170,6 @@ export class SolicitarCotizacionComponent implements OnInit {
     //* Regresar el tap de refacciones a la primera
     const checkbox = document.getElementById("next-refaccionn") as HTMLInputElement | null;
     if (checkbox) {
-      console.log("aqui")
       checkbox.checked = false
     }
   }
@@ -370,6 +366,7 @@ export class SolicitarCotizacionComponent implements OnInit {
 
   request() {
 
+    this.descripcion = tinymce.get("texteditor").getContent();
     if (this.titulo != '' && this.descripcion != '' && this.equipos_selected.length > 0) {
       const token = this._login_service.getToken()
       this.registrar = {
@@ -386,7 +383,6 @@ export class SolicitarCotizacionComponent implements OnInit {
         refacciones: this.refacciones_select_list,
         archivos: []
       }
-
       this._cotizaciones_clienteService.registro_solicitud_cotizacion_JSON(this.registrar).subscribe({
         next: (v) => {
           if (v != undefined) {
